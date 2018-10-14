@@ -2,7 +2,7 @@
 
 const express = require('express')
 const api = express.Router()
-const auth = require('../middlewares/auth')
+//const auth = require('../middlewares/auth')
 
 const UserCtrl = require('../controllers/user')
 const PedidoCtrl  = require('../controllers/pedido')

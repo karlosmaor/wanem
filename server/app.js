@@ -10,7 +10,7 @@ app.use('/public', expressStatic('./public'))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-app.use('/empresapp',function (req, res, next) {
+app.use('/api',function (req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
