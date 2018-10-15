@@ -12,6 +12,7 @@ const UserSchema = new Schema({
   pedidos: [{type: Schema.Types.ObjectId, ref: 'Pedido'}],
   coins: {type: Number, default: 0},
   tokenNotification: String,
+  city: String,
   position: {
     lat: {type: Number, default: 0.0},
     lng: {type: Number, default: 0.0}
