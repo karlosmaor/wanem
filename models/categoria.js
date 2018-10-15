@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 const CategoriaSchema = new Schema({
   name: String,
   image: String,
+  visible: Boolean,
   empresas: [{type: Schema.Types.ObjectId, ref: 'Empresa'}]
 })
 

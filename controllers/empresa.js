@@ -69,7 +69,7 @@ function signUp(req,res){
   const empresa = new Empresa()
   empresa.email = req.body.email
   empresa.password = req.body.password
-  empresa.name = req.body.name  
+  empresa.name = req.body.name
   empresa.signupDate = new Date()
   empresa.lastLogin = new Date()
 
