@@ -19,7 +19,8 @@ const InfoSchema = new Schema({
     visible: Boolean
   }],
   version: Number,
-  city: String
+  city: String,
+  date: Date
 })
 
 module.exports = mongoose.model('Info',InfoSchema)
