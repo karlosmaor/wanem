@@ -15,7 +15,7 @@ const EmpresaSchema = new Schema({
   description: String,
   category: String,
   tipo : String,
-  visible: Boolean,
+  visible: {type: Boolean, default: true},
   pedidos: [{type: Schema.Types.ObjectId, ref: 'Pedido'}],
   ImagesPromo : [{
     img: String,
