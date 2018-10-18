@@ -8,6 +8,7 @@ const UserCtrl = require('../controllers/user')
 const PedidoCtrl  = require('../controllers/pedido')
 const EmpresaCtrl  = require('../controllers/empresa')
 const EventoCtrl = require('../controllers/evento')
+const InfoCtrl = require('../controllers/info')
 
 //----------------Rutas Users-------------//
 
