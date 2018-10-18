@@ -24,7 +24,6 @@ function saveInfo(req,res){
 
   info.save((err, infoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
-    let empresaId = infoStored.empresa
 
     res.status(200).send({message:'Información guardada'})
   })

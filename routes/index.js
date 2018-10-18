@@ -51,6 +51,11 @@ api.post('/evento/:eventoId', EventoCtrl.updateEvento)
 api.put('/evento/:eventoId', EventoCtrl.updateEvento)
 api.delete('/evento/:eventoId', EventoCtrl.deleteEvento)
 
+//---------------Rutas para info----------//
+
+api.get('/infos', InfoCtrl.getInfos)
+api.post('/info', InfoCtrl.saveInfo)
+
 /*api.get('/private', auth, function(req,res){
   res.status(200).send({message:'Tienes acceso'})
 })*/
