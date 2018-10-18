@@ -9,7 +9,15 @@ const InfoSchema = new Schema({
   description: String,
   valorDomicilio1: Number,
   valorDomicilio2: Number,
-  categorias: [{type: Schema.Types.ObjectId, ref: 'Categoria'}],
+  ImagesPromo : [{
+    img: String,
+    iden: String
+  }],
+  categorias: [{
+    name: String,
+    image: String,
+    visible: Boolean
+  }],
   version: Number,
   city: String
 })

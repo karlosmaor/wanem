@@ -66,10 +66,10 @@ function deleteEmpresa(req,res){
 }
 
 function signUp(req,res){
-  const empresa = new Empresa()
-  empresa.email = req.body.email
+  const empresa = new Empresa(req.body)
+  /*empresa.email = req.body.email
   empresa.password = req.body.password
-  empresa.name = req.body.name
+  empresa.name = req.body.name*/
   empresa.signupDate = new Date()
   empresa.lastLogin = new Date()
 

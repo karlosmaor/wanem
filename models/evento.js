@@ -10,11 +10,17 @@ const EventoSchema = new Schema({
   address: String,
   description: String,
   precio: Number,
+  imagePromo: {
+    img: String,
+    iden:String
+  },
   caracteristicas: [{
     nombre: String,
     multiSeleccion: Boolean,
-    opciones: [String],
-    precios: [Number]
+    opciones: [{
+      nombre: String,
+      precio: Number
+    }]
   }],
   position: {
     lat: {type: Number, default: 0.0},
