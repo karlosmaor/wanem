@@ -31,7 +31,7 @@ function saveEvento(req,res){
 
   console.log(req.body);
   let eventolisto = JSON.parse(req.body.eventoJson)
-  console.log(eventolisto.empresa);
+  console.log(eventolisto.ImagesPromo.img);
 
   res.status(200).send("Muy perfecto")
 /*
