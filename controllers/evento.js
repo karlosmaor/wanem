@@ -48,7 +48,6 @@ function saveEvento(req,res){
       })
     })
   })
-  */
 }
 
 function updateEvento(req,res){
