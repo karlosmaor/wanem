@@ -26,30 +26,29 @@ function getEmpresas(req, res){
 }
 
 function updateEmpresa(req,res){
-  let empresaId = req.params.empresaId
-  let update = req.body
+  let empresaJson = JSON.parse(req.body.empresaJson)
+  empresaJson.eventos = undefined
+  if(empresaJson.password.length == 0){
+    console.log("Eliminada password");
+    empresaJson.password = undefined
+  }
+  let eventoId = req.params.empresaId
 
-  if(update.position != undefined) update.position = JSON.parse(update.position)
-  if(update.ImagesPromo != undefined) update.ImagesPromo = JSON.parse(update.ImagesPromo)
-  if(update.eventos != undefined) update.eventos = JSON.parse(update.eventos)
-  if(update.categorias != undefined) update.categorias = JSON.parse(update.categorias)
-  if(update.schedule != undefined) update.schedule = JSON.parse(update.schedule)
+  Empresa.findByIdAndUpdate(empresaId, empresaJson, (err, empresaUpdated) =>{
+    if(err) return res.status(500).send({message:`Error al editar la Empresa en la base de datos ${err}`})
 
-  Empresa.findByIdAndUpdate(empresaId, update, (err, empresaUpdated) =>{
-    if(err) return res.status(500).send({message:`Error al editar el Empresa en la base de datos ${err}`})
-
-    if(update.password != undefined){
+    if(empresaJson.password != undefined){
 
       Empresa.findById(empresaId, (err, empresa)=>{
         if(err) return res.status(500).send(err)
-        empresa.password = update.password
+        empresa.password = empresaJson.password
         empresa.save((err)=>{
           if(err)return res.status(500).send(err)
 
         })
       })
     }
-    res.status(200).send(empresaUpdated)
+    res.status(200).send("Actualización exitosa.")
   })
 }
 
