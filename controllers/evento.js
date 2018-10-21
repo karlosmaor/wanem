@@ -28,12 +28,13 @@ function getEventos(req, res){
 }
 
 function saveEvento(req,res){
-
-  let evento = new Evento(JSON.parse(req.body.eventoJson));
+  let eventoJson = JSON.parse(req.body.eventoJson)
+  eventoJson._id = undefined
+  let evento = new Evento(eventoJson)
   evento.date = new Date()
 
   evento.save((err, eventoStored)=>{
-    if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+    if(err)return res.status(500).send({message :`Error al guardar el evento en la base de datos: ${err}`})
     let empresaId = eventoStored.empresa
 
     Empresa.findById(empresaId, (err, empresa) => {
