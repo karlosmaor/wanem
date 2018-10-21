@@ -32,7 +32,7 @@ function updateEmpresa(req,res){
     console.log("Eliminada password");
     empresaJson.password = undefined
   }
-  let eventoId = req.params.empresaId
+  let empresaId = req.params.empresaId
 
   Empresa.findByIdAndUpdate(empresaId, empresaJson, (err, empresaUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar la Empresa en la base de datos ${err}`})
