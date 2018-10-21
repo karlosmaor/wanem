@@ -53,7 +53,6 @@ function saveEvento(req,res){
 
 function updateEvento(req,res){
   let eventoJson = JSON.parse(req.body.eventoJson)
-  eventoJson._id = undefined
   let eventoId = req.params.eventoId
 
   Evento.findByIdAndUpdate(eventoId, eventoJson,  (err, eventoUpdated) =>{
