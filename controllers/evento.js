@@ -29,7 +29,7 @@ function getEventos(req, res){
 
 function saveEvento(req,res){
   let eventoJson = JSON.parse(req.body.eventoJson)
-  eventoJson._id = undefined
+  delete eventoJson._id
 
   let evento = new Evento(eventoJson)
 

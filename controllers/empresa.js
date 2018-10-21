@@ -29,8 +29,7 @@ function updateEmpresa(req,res){
   let empresaJson = JSON.parse(req.body.empresaJson)
   delete empresaJson.eventos
   if(empresaJson.password.length == 0){
-    console.log("Eliminada password");
-    empresaJson.password = undefined
+    delete empresaJson.password 
   }
   let empresaId = req.params.empresaId
 
