@@ -29,7 +29,7 @@ function getEventos(req, res){
 
 function saveEvento(req,res){
 
-  let evento = JSON.parse(req.body.eventoJson);
+  let evento = new Evento(JSON.parse(req.body.eventoJson));
   evento.date = new Date()
 
   evento.save((err, eventoStored)=>{
