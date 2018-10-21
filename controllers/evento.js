@@ -29,32 +29,19 @@ function getEventos(req, res){
 
 function saveEvento(req,res){
 
-  console.log(req.body);
-  let eventolisto = JSON.parse(req.body.eventoJson)
-  console.log(eventolisto.ImagesPromo.img);
-
-  res.status(200).send("Muy perfecto")
-/*
-  let evento = new Evento()
-  evento.empresa = req.body.empresa
-  evento.name = req.body.name
-  evento.address = req.body.address
-  evento.description = req.body.description
-  evento.precio = req.body.precio
-  if(req.body.position != undefined) evento.position = JSON.parse(req.body.position)
-  if(req.body.caracteristicas != undefined) evento.carateristicas = JSON.parse(req.body.carateristicas)
+  let evento = JSON.parse(req.body.eventoJson;
   evento.date = new Date()
 
   evento.save((err, eventoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     let empresaId = eventoStored.empresa
 
-    Empresa.findById(empresaId, (err, client) => {
+    Empresa.findById(empresaId, (err, empresa) => {
 
       if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
-      if(!client) return res.status(404).send({message:'La empresa no existe'})
-      client.eventos.push(eventoStored._id)
-      client.save((err)=>{
+      if(!empresa) return res.status(404).send({message:'La empresa no existe'})
+      empresa.eventos.push(eventoStored._id)
+      empresa.save((err)=>{
         if(err)return res.status(500).send(err)
 
         res.status(200).send(eventoStored)
