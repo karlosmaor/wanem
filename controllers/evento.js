@@ -29,6 +29,9 @@ function getEventos(req, res){
 
 function saveEvento(req,res){
 
+  console.log(req.body);
+  console.log(req.body.evento.empresa);
+/*
   let evento = new Evento()
   evento.empresa = req.body.empresa
   evento.name = req.body.name
@@ -55,6 +58,7 @@ function saveEvento(req,res){
       })
     })
   })
+  */
 }
 
 function updateEvento(req,res){

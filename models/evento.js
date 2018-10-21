@@ -6,13 +6,13 @@ const Schema = mongoose.Schema
 const EventoSchema = new Schema({
   empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
   name: String,
-  date: Date,
   address: String,
   description: String,
   precio: Number,
-  imagePromo: {
+  date: Date,
+  ImagesPromo: {
     img: String,
-    iden:String
+    iden: String
   },
   caracteristicas: [{
     nombre: String,
@@ -21,11 +21,7 @@ const EventoSchema = new Schema({
       nombre: String,
       precio: Number
     }]
-  }],
-  position: {
-    lat: {type: Number, default: 0.0},
-    lng: {type: Number, default: 0.0}
-  }
+  }]
 })
 
 
