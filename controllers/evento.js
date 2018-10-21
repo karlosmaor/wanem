@@ -31,6 +31,8 @@ function saveEvento(req,res){
 
   console.log(req.body);
   console.log(req.body.evento.empresa);
+
+  res.status(200).send("Muy perfecto")
 /*
   let evento = new Evento()
   evento.empresa = req.body.empresa
