@@ -5,7 +5,7 @@ const app  = require('./app')
 const config = require('../config')
 //const websocket = require('../websocket/server/main')
 
-mongoose.connect(config.db, { useCreateIndex: true, useNewUrlParser: true }, (err,res)=>{
+mongoose.connect(config.db, { useCreateIndex: true, useNewUrlParser: true, useFindAndModify: false }, (err,res)=>{
   if(err){
     return console.log(`Error al conectarse a la base de datos: ${err}`);
   }
