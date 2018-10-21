@@ -30,7 +30,6 @@ function getEventos(req, res){
 function saveEvento(req,res){
   let eventoJson = JSON.parse(req.body.eventoJson)
   eventoJson._id = undefined
-  eventoJson.date = new Date()
 
   let evento = new Evento(eventoJson)
 
@@ -53,36 +52,15 @@ function saveEvento(req,res){
 }
 
 function updateEvento(req,res){
-
+  let eventoJson = JSON.parse(req.body.eventoJson)
+  eventoJson._id = undefined
   let eventoId = req.params.eventoId
-  let update = req.body
-  if(req.body.position != undefined) evento.position = JSON.parse(req.body.position)
-  if(req.body.caracteristicas != undefined) evento.carateristicas = JSON.parse(req.body.carateristicas)
 
-  Evento.findByIdAndUpdate(eventoId, update,  (err, eventoUpdated) =>{
+  Evento.findByIdAndUpdate(eventoId, eventoJson,  (err, eventoUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
     if(eventoUpdated == undefined) return res.status(404).send('No se encontró el evento')
 
-    Evento.findById(eventoUpdated._id).exec((err, eventoNew)=>{
-      if(err) return res.status(500).send(err)
-      res.status(200).send(eventoNew)
-
-      // if((eventoUpdated.state == 0 && eventoNew.state == 1)||(eventoUpdated.state == 0 && eventoNew.state == 4)) {
-      //   var JsonEvento = JSON.stringify(eventoNew)
-      //   firebase.SendNotificationDomiciliarios(config.state1,JsonEvento, "delete")
-      // }
-      // if((eventoUpdated.state == 1 && eventoNew.state == 0)||(eventoUpdated.state == 2 && eventoNew.state == 0)) {
-      //   var JsonEvento = JSON.stringify(eventoNew)
-      //   firebase.SendNotificationDomiciliarios(config.state1,JsonEvento, "add")
-      // }
-      // if (eventoUpdated.state == 1 && eventoNew.state == 2){
-      //   Domiciliario.findByIdAndUpdate(eventoNew.domiciliario,{state: 3},(err, domiciliarioUpdated)=>{
-      //     if(err)return res.status(500).send(err)
-      //     res.status(200).send(eventoNew)
-      //   })
-      // }else {
-      //   res.status(200).send(eventoNew)
-      // }
+    res.status(200).send(eventoNew)
     })
   })
 }
