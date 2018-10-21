@@ -60,8 +60,7 @@ function updateEvento(req,res){
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
     if(eventoUpdated == undefined) return res.status(404).send('No se encontró el evento')
 
-    res.status(200).send(eventoNew)
-    })
+    res.status(200).send("Actualizacion exitosa")
   })
 }
 
