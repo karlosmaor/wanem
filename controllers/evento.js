@@ -30,8 +30,9 @@ function getEventos(req, res){
 function saveEvento(req,res){
   let eventoJson = JSON.parse(req.body.eventoJson)
   eventoJson._id = undefined
+  eventoJson.date = new Date()
+
   let evento = new Evento(eventoJson)
-  evento.date = new Date()
 
   evento.save((err, eventoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar el evento en la base de datos: ${err}`})
