@@ -30,8 +30,8 @@ function getEventos(req, res){
 function saveEvento(req,res){
 
   console.log(req.body);
-  let evento = JSON.parse(req.body.evento)
-  console.log(req.body.evento.empresa);
+  let eventolisto = JSON.parse(req.body.evento)
+  console.log(eventolisto.empresa);
 
   res.status(200).send("Muy perfecto")
 /*
