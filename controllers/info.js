@@ -6,7 +6,7 @@ const Empresa =  require('../models/empresa')
 const config = require('../config')
 
 function getInformacion(req, res){
-  Info.find({}).limit(1).sort('-date').populate('categorias').exec((err, infos)=>{
+  Info.find({}).limit(1).sort('-date').populate('categorias.empresas').exec((err, infos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
