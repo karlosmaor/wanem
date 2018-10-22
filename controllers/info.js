@@ -11,15 +11,15 @@ function getInfos(req, res){
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
 
-    res.status(200).send(infos[1])
+    res.status(200).send(infos[0])
   })
 }
 
 function saveInfo(req,res){
+  let infoJson = JSON.parse(req.body.infoJson)
+  delete infoJson._id
 
-  let info = new Info(req.body)
-  if(req.body.ImagesPromo != undefined) update.ImagesPromo = JSON.parse(update.ImagesPromo)
-  if(req.body.categorias != undefined) info.categorias = JSON.parse(req.body.categorias)
+  let info = new Info(infoJson)
   info.date = new Date()
 
   info.save((err, infoStored)=>{
