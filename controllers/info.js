@@ -5,7 +5,7 @@ const Info =  require('../models/info')
 const Empresa =  require('../models/empresa')
 const config = require('../config')
 
-function getInfos(req, res){
+function getInformacion(req, res){
   Info.find({}).limit(1).sort('-date').exec((err, infos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})

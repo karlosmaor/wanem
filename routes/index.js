@@ -55,6 +55,7 @@ api.delete('/evento/:eventoId', EventoCtrl.deleteEvento)
 //---------------Rutas para info----------//
 
 api.get('/infos', InfoCtrl.getInfos)
+api.get('/informacion', InfoCtrl.getInformacion)
 api.post('/info', InfoCtrl.saveInfo)
 
 /*api.get('/private', auth, function(req,res){
