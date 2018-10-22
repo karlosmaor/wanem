@@ -5,24 +5,15 @@ const Info =  require('../models/info')
 const Empresa =  require('../models/empresa')
 const config = require('../config')
 
-function getInformacion(req, res){
+/*function getInformacion(req, res){
   Info.find({}).limit(1).sort('-date').exec((err, infos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
-    let informacion = new Object(infos[0])
 
-    var i
-    for(i=0; i<informacion.categorias.length; i++){
-      Empresa.find({}, (err, empresasLista)=>{
-        if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
-
-        informacion.categorias[i].empresas = empresasLista
-      })
-    }
-    res.status(200).send(informacion)
+    res.status(200).send(infos[0])
   })
-}
+}*/
 
 function getInfos(req, res){
   Info.find({}).limit(1).sort('-date').exec((err, infos)=>{

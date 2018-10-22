@@ -18,7 +18,7 @@ const InfoSchema = new Schema({
     name: String,
     image: String,
     visible: Boolean,
-    empresas: []
+    empresas: [{type: Schema.Types.ObjectId, ref: 'Empresa'}]
   }],
   version: Number,
   city: String,
