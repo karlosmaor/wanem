@@ -12,6 +12,7 @@ function getInformacion(req, res){
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
     let informacion = infos[0]
 
+    var i
     for(i=0; i<informacion.categorias.length; i++){
       Empresa.find({category: informacion.categorias[i].name}, (err, empresasLista)=>{
         if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
