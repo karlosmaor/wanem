@@ -6,16 +6,16 @@ const Empresa =  require('../models/empresa')
 const config = require('../config')
 
 function getInformacion(req, res){
-  Info.find({}).limit(1).sort('-date').exec((err, infos)=>{
+  Info.find({}).limit(1).sort('-date').populate('categorias').exec((err, infos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
-    var i;
+  /*  var i;
     var str = 'categorias.'
     for (i = 0; i < infos[0].categorias.length; i++) {
-        if(infos[0].categorias[i].empresas.length>0) infos[0].populate(str.concat(i.toString(),'.empresas')).execPopulate();
+        if(infos[0].categorias[i].empresas.length>0) infos[0].populate(str.concat(i.toString(),'.empresas')).execPopulate()
     }
-
+    */
     res.status(200).send(infos[0])
   })
 }
