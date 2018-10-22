@@ -41,6 +41,5 @@ function saveInfo(req,res){
 
 module.exports ={
   getInfos,
-  getInformacion,
   saveInfo
 }
