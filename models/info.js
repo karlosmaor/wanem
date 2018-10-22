@@ -18,7 +18,7 @@ const InfoSchema = new Schema({
     name: String,
     image: String,
     visible: Boolean,
-    empresas: [Empresa]
+    empresas: []
   }],
   version: Number,
   city: String,
