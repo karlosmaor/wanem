@@ -14,7 +14,7 @@ function getInformacion(req, res){
 
     var i
     for(i=0; i<informacion.categorias.length; i++){
-      Empresa.find({category: informacion.categorias[i].name}, (err, empresasLista)=>{
+      Empresa.find({}, (err, empresasLista)=>{
         if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
         informacion.categorias[i].empresas = empresasLista
