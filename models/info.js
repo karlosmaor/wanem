@@ -1,6 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose')
+const Empresa = require('../models/empresa')
 const Schema = mongoose.Schema
 
 const InfoSchema = new Schema({
@@ -16,7 +17,8 @@ const InfoSchema = new Schema({
   categorias: [{
     name: String,
     image: String,
-    visible: Boolean
+    visible: Boolean,
+    empresas: [Empresa]
   }],
   version: Number,
   city: String,
