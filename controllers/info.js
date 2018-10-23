@@ -14,15 +14,14 @@ function getInformacion(req, res){
 
     Empresa.find({},'ImagesPromo').exec((err, empresas)=>{
       if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
-      var images = infos[0].ImagesPromo
+
       empresas.forEach(function(element){
         element.ImagesPromo.forEach(function(ImPro){
-          images.push(ImPro)
-          console.log(ImPro);
+          infos[0].ImagesPromo.push(ImPro)
         })
       })
 
-      res.status(200).send(images)
+      res.status(200).send(infos[0])
     })
   })
 }
