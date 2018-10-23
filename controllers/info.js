@@ -12,7 +12,15 @@ function getInformacion(req, res){
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
 
-    res.status(200).send(infos[0])
+    Empresa.find({},'ImagesPromo').exec((err, empresas)=>{
+      if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+
+      empresas.forEach(function(element){
+        infos[0].ImagesPromo.concat(element.ImagesPromo)
+      })
+      
+      res.status(200).send(infos[0])
+    })
   })
 }
 
