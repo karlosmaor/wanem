@@ -17,7 +17,7 @@ function getEmpresa(req,res){
 }
 
 function getEmpresas(req, res){
-  Empresa.find({},'ImagesPromo', '-_id -eventos').populate('eventos').exec((err, empresas)=>{
+  Empresa.find({}).populate('eventos').exec((err, empresas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(empresas.length == 0)return res.status(501).send({message:'No hay Empresas registrados'})
 
