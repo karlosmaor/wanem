@@ -26,8 +26,7 @@ function getInformacion(req, res){
 
 
         eventos.forEach(function(element){
-          //infos[0].ImagesPromo.push(ImPro)
-          console.log(element.ImagesPromo);
+          infos[0].ImagesPromo.push(element.ImagesPromo)
         })
         res.status(200).send(infos[0])
       })
