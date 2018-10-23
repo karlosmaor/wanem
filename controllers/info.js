@@ -17,7 +17,7 @@ function getInformacion(req, res){
       var images = infos[0].ImagesPromo
       empresas.forEach(function(element){
         element.ImagesPromo.forEach(function(ImPro){
-            console.log(element.ImagesPromo);
+            console.log(ImPro);
         })
       })
 
