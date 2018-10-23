@@ -33,7 +33,7 @@ function saveInfo(req,res){
 
   let info = new Info(infoJson)
 
-  Evento.find({}, '_id' (err, eventos)=>{
+  Evento.find({}, '_id', (err, eventos)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     info.eventos = eventos
 
