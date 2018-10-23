@@ -16,6 +16,7 @@ function getInformacion(req, res){
       if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
       var images = infos[0].ImagesPromo
       empresas.forEach(function(element){
+        console.log(element.ImagesPromo);
         images.concat(element.ImagesPromo)
       })
 
