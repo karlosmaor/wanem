@@ -17,7 +17,7 @@ function getEmpresa(req,res){
 }
 
 function getEmpresas(req, res){
-  Empresa.find({}).populate('eventos').exec((err, empresas)=>{
+  Empresa.find({},'ImagesPromo').populate('eventos').exec((err, empresas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(empresas.length == 0)return res.status(501).send({message:'No hay Empresas registrados'})
 
@@ -29,7 +29,7 @@ function updateEmpresa(req,res){
   let empresaJson = JSON.parse(req.body.empresaJson)
   delete empresaJson.eventos
   if(empresaJson.password.length == 0){
-    delete empresaJson.password 
+    delete empresaJson.password
   }
   let empresaId = req.params.empresaId
 

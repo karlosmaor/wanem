@@ -18,7 +18,7 @@ function getEvento(req,res){
 }
 
 function getEventos(req, res){
-  Evento.find({}).limit(15).sort('-date').exec((err, eventos)=>{
+  Evento.find({}).sort('-date').exec((err, eventos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(eventos.length == 0)return res.status(501).send({message:'No hay entregas'})
