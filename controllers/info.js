@@ -21,7 +21,16 @@ function getInformacion(req, res){
         })
       })
 
-      res.status(200).send(infos[0])
+      Evento.find({}, 'ImagesPromo', (err, eventos)=>{
+        if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+
+
+        eventos.forEach(function(element){
+          //infos[0].ImagesPromo.push(ImPro)
+          console.log(element.ImagesPromo);
+        })
+        res.status(200).send(infos[0])
+      })
     })
   })
 }
