@@ -3,19 +3,15 @@
 const mongoose = require('mongoose')
 const Info =  require('../models/info')
 const Empresa =  require('../models/empresa')
+const Empresa =  require('../models/evento')
 const config = require('../config')
 
 function getInformacion(req, res){
-  Info.find({}).limit(1).sort('-date').populate('categorias.empresas').exec((err, infos)=>{
+  Info.find({}).limit(1).sort('-date').populate('categorias.empresas').populate('eventos').exec((err, infos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(infos.length == 0)return res.status(501).send({message:'No hay información registrada'})
-  /*  var i;
-    var str = 'categorias.'
-    for (i = 0; i < infos[0].categorias.length; i++) {
-        if(infos[0].categorias[i].empresas.length>0) infos[0].populate(str.concat(i.toString(),'.empresas')).execPopulate()
-    }
-    */
+
     res.status(200).send(infos[0])
   })
 }
@@ -37,10 +33,15 @@ function saveInfo(req,res){
 
   let info = new Info(infoJson)
 
-  info.save((err, infoStored)=>{
-    if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+  Evento.find({}, '_id' (err, eventos)=>{
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    info.eventos = eventos
 
-    res.status(200).send({message:'Información guardada'})
+    info.save((err, infoStored)=>{
+      if(err)return res.status(500).send({message :`Error al guardar la información en la base de datos: ${err}`})
+
+      res.status(200).send({message:'Información guardada'})
+    })
   })
 }
 

@@ -22,7 +22,8 @@ const InfoSchema = new Schema({
   }],
   version: Number,
   city: String,
-  date: Date
+  date: Date,
+  eventos: [{type: Schema.Types.ObjectId, ref: 'Evento'}]
 })
 
 module.exports = mongoose.model('Info',InfoSchema)
