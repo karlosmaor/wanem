@@ -3,7 +3,7 @@
 const mongoose = require('mongoose')
 const Info =  require('../models/info')
 const Empresa =  require('../models/empresa')
-const Empresa =  require('../models/evento')
+const Evento =  require('../models/evento')
 const config = require('../config')
 
 function getInformacion(req, res){
