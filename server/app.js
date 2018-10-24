@@ -8,6 +8,7 @@ const api = require('../routes')
 
 app.use('/info', expressStatic('./public'))
 app.use('/rex', expressStatic('./public/rex'))
+app.use('/conopizza', expressStatic('./public/conopizza'))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
