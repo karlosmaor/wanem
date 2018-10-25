@@ -52,14 +52,24 @@ function saveInfo(req,res){
 
   let info = new Info(infoJson)
 
-  Evento.find({}, '_id', (err, eventos)=>{
+  Empresa.find({visible: true},'category').exec((err, empresas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
-    info.eventos = eventos
 
-    info.save((err, infoStored)=>{
-      if(err)return res.status(500).send({message :`Error al guardar la información en la base de datos: ${err}`})
+    empresas.forEach(function(empre){
+      if(empre.category != undefined && info.categorias.find(x => x.name == empre.category) != undefined){
+        info.categorias.find(x => x.name == empre.category).empresas.push(empre._id)
+      }
+    })
 
-      res.status(200).send({message:'Información guardada'})
+    Evento.find({}, '_id', (err, eventos)=>{
+      if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+      info.eventos = eventos
+
+      info.save((err, infoStored)=>{
+        if(err)return res.status(500).send({message :`Error al guardar la información en la base de datos: ${err}`})
+
+        res.status(200).send({message:'Información guardada'})
+      })
     })
   })
 }
