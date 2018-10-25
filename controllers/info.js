@@ -24,10 +24,11 @@ function getInformacion(req, res){
       Evento.find({}, 'ImagesPromo', (err, eventos)=>{
         if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
-
         eventos.forEach(function(element){
           infos[0].ImagesPromo.push(element.ImagesPromo)
         })
+        const categor = infos[0].categorias.find(x => x.visible == true)
+        infos[0].categorias = categor;
         res.status(200).send(infos[0])
       })
     })
