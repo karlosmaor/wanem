@@ -29,7 +29,7 @@ function getInformacion(req, res){
         })
         const categor = infos[0].categorias.find(x => x.visible == true)
         infos[0].categorias = categor;
-        res.status(200).send(infos[0])
+        res.status(200).send(categor)
       })
     })
   })
