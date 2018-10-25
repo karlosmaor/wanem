@@ -55,6 +55,10 @@ function saveInfo(req,res){
   Empresa.find({visible: true},'category').exec((err, empresas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
+    info.categorias.forEach(function(cat){
+      cat.empresas = new Array(0)
+    })
+
     empresas.forEach(function(empre){
       if(empre.category != undefined && info.categorias.find(x => x.name == empre.category) != undefined){
         info.categorias.find(x => x.name == empre.category).empresas.push(empre._id)
