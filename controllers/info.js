@@ -27,7 +27,7 @@ function getInformacion(req, res){
         eventos.forEach(function(element){
           infos[0].ImagesPromo.push(element.ImagesPromo)
         })
-        const categor = infos[0].categorias.find(x => x.visible == true)
+        const categor = infos[0].categorias.filter(x => x.visible == true)
         infos[0].categorias = categor;
         res.status(200).send(infos[0])
       })
