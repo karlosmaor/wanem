@@ -39,7 +39,7 @@ function savePedido(req,res){
   pedido.comentario = req.body.comentario
   if(req.body.positionStart != undefined) pedido.positionStart = JSON.parse(req.body.positionStart)
   if(req.body.positionEnd != undefined) pedido.positionEnd = JSON.parse(req.body.positionEnd)
-  if(req.body.empresas != undefined) pedido.empresas = JSON.parse(req.body.empresas)
+  if(req.body.productos != undefined) pedido.productos = JSON.parse(req.body.productos)
   pedido.date = new Date()
 
   pedido.save((err, pedidoStored)=>{

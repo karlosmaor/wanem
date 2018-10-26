@@ -14,7 +14,7 @@ const PedidoSchema = new Schema({
     nombre: String,
     descripcion: String,
     imagen: String,
-    inden: String,
+    iden: String,
     precio: Number,
     cantidad: Number,
     caracteristicas: [{
@@ -22,12 +22,14 @@ const PedidoSchema = new Schema({
       multiSeleccion: Boolean,
       opciones: [{
         nombre: String,
-        precio: Number
+        precio: Number,
+        estado:Boolean
       }]
     }]
   }],
   total: Number,
   comentario: String,
+  city: String,
   positionStart: {
     lat: {type: Number, default: 0.0},
     lng: {type: Number, default: 0.0}
