@@ -10,19 +10,19 @@ const PedidoSchema = new Schema({
   date: Date,
   category: String,
   state: {type:Number, default: 0},
-  empresas:[{
-    empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
-    productos: [{
+  productos: [{
+    nombre: String,
+    descripcion: String,
+    imagen: String,
+    inden: String,
+    precio: Number,
+    cantidad: Number,
+    caracteristicas: [{
       nombre: String,
-      precio: Number,
-      cantidad: Number,
-      caracteristicas: [{
+      multiSeleccion: Boolean,
+      opciones: [{
         nombre: String,
-        multiSeleccion: Boolean,
-        opciones: [{
-          nombre: String,
-          precio: Number
-        }]
+        precio: Number
       }]
     }]
   }],

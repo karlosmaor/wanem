@@ -39,7 +39,7 @@ function savePedido(req,res){
   pedido.comentario = req.body.comentario
   if(req.body.positionStart != undefined) pedido.positionStart = JSON.parse(req.body.positionStart)
   if(req.body.positionEnd != undefined) pedido.positionEnd = JSON.parse(req.body.positionEnd)
-  if(req.body.productos != undefined) pedido.productos = JSON.parse(req.body.productos)
+  if(req.body.empresas != undefined) pedido.empresas = JSON.parse(req.body.empresas)
   pedido.date = new Date()
 
   pedido.save((err, pedidoStored)=>{
@@ -49,16 +49,16 @@ function savePedido(req,res){
     User.findById(userId, (err, client) => {
 
       if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
-      if(!client) return res.status(404).send({message:'El Client no existe'})
+      if(!client) return res.status(404).send({message:'El cliente no existe'})
       client.pedidos.push(pedidoStored._id)
       client.save((err)=>{
         if(err)return res.status(500).send(err)
-
-        Pedido.findById(pedidoStored._id).populate({path:'user', select:['name', 'phone']}).exec((err, pedidoEnvio)=>{
+        res.status(200).send(pedidoStored)
+        /*Pedido.findById(pedidoStored._id).populate({path:'user', select:['name', 'phone']}).exec((err, pedidoEnvio)=>{
           var JsonPedido = JSON.stringify(pedidoEnvio)
         //  firebase.SendNotificationDomiciliarios(config.state1,JsonPedido,"add")
           res.status(200).send(pedidoStored)
-        })
+        })*/
       })
     })
   })
