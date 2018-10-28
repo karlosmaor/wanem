@@ -29,11 +29,10 @@ function getPedidos(req, res){
 
 function savePedido(req,res){
 
-  let pedido = new Pedido(req.body)
-  if(req.body.positionStart != undefined) pedido.positionStart = JSON.parse(req.body.positionStart)
-  if(req.body.positionEnd != undefined) pedido.positionEnd = JSON.parse(req.body.positionEnd)
-  if(req.body.productos != undefined) pedido.productos = JSON.parse(req.body.productos)
-  pedido.date = new Date()
+  let pedidoJson = JSON.parse(req.body.pedidoJson)
+  pedidoJson.date = new Date()
+
+  let pedido = new Pedido(pedidoJson)
 
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
