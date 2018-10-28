@@ -14,6 +14,7 @@ const PedidoSchema = new Schema({
     nombre: String,
     descripcion: String,
     imagen: String,
+    empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
     iden: String,
     precio: Number,
     cantidad: Number,
@@ -23,7 +24,7 @@ const PedidoSchema = new Schema({
       opciones: [{
         nombre: String,
         precio: Number,
-        estado:Boolean
+        estado:{type:Boolean, default: false}
       }]
     }]
   }],
