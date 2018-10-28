@@ -29,14 +29,7 @@ function getPedidos(req, res){
 
 function savePedido(req,res){
 
-  let pedido = new Pedido()
-  pedido.user = req.body.user
-  pedido.empresa = req.body.empresa
-  pedido.addressStart = req.body.addressStart
-  pedido.addressEnd = req.body.addressEnd
-  pedido.category = req.body.category
-  pedido.total = req.body.total
-  pedido.comentario = req.body.comentario
+  let pedido = new Pedido(req.body)
   if(req.body.positionStart != undefined) pedido.positionStart = JSON.parse(req.body.positionStart)
   if(req.body.positionEnd != undefined) pedido.positionEnd = JSON.parse(req.body.positionEnd)
   if(req.body.productos != undefined) pedido.productos = JSON.parse(req.body.productos)

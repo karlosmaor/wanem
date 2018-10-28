@@ -5,16 +5,17 @@ const Schema = mongoose.Schema
 
 const PedidoSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'},
-  addressStart: String,
   addressEnd: String,
+  phone: String,
+  nombreUser: String,
   date: Date,
   category: String,
   state: {type:Number, default: 0},
   productos: [{
     nombre: String,
     descripcion: String,
+    address: String,
     imagen: String,
-    empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
     iden: String,
     precio: Number,
     cantidad: Number,
