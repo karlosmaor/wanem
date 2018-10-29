@@ -62,8 +62,7 @@ function deleteUser(req,res){
 }
 
 function saveUser(req,res){
-
-  console.log(req.body);
+  
   let userJson = JSON.parse(req.body.userJson)
   userJson.lastLogin = new Date()
 

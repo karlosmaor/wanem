@@ -28,7 +28,7 @@ function getPedidos(req, res){
 }
 
 function savePedido(req,res){
-  
+
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
 
@@ -38,7 +38,20 @@ function savePedido(req,res){
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     let userId = pedidoStored.user
 
-    res.status(200).send(pedidoStored)
+    User.findById(userId, (err, client){
+      if(err) return res.status(500).send(err)
+
+      client.phone = pedido.phone
+      client.address = pedido.addressEnd
+      client.name = pedido.nombreUser
+      client.pedidos.push(pedido._id)
+
+      client.save((err)=>{
+        if(err)return res.status(500).send(err)
+
+        res.status(200).send(pedidoStored)
+      })
+    })
   })
 }
 
