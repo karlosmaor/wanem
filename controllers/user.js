@@ -62,13 +62,13 @@ function deleteUser(req,res){
 }
 
 function saveUser(req,res){
-  
+
   let userJson = JSON.parse(req.body.userJson)
   userJson.lastLogin = new Date()
 
   let user = new User(userJson)
 
-  User.findOne({email: user.email}, (err,clien) =>{
+  User.findOne({email: user.email}).populate('pedidos').exec((err,clien) =>{
     if(err) return res.status(500).send({message: err})
 
     if(!clien) {
