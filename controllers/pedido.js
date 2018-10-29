@@ -28,7 +28,7 @@ function getPedidos(req, res){
 }
 
 function savePedido(req,res){
-  
+
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
 
@@ -41,9 +41,9 @@ function savePedido(req,res){
     User.findById(userId, (err, client)=>{
       if(err) return res.status(500).send(err)
 
-      client.phone = pedido.phone
-      client.address = pedido.addressEnd
-      client.name = pedido.nombreUser
+      if(pedido.phone != undefined) client.phone = pedido.phone
+      if(pedido.address != undefined) client.address = pedido.addressEnd
+      if(pedido.nombreUser != undefined) client.name = pedido.nombreUser
       client.pedidos.push(pedido._id)
 
       client.save((err)=>{
