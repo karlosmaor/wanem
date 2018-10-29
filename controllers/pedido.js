@@ -28,7 +28,7 @@ function getPedidos(req, res){
 }
 
 function savePedido(req,res){
-  console.log(req.body)
+  console.log(req.body.pedidoJson)
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
 
