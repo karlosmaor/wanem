@@ -28,34 +28,17 @@ function getPedidos(req, res){
 }
 
 function savePedido(req,res){
-  console.log(req.body.pedidoJson)
+
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
 
-  console.log(pedidoJson.phone);
-
   let pedido = new Pedido(pedidoJson)
 
-console.log(pedido.phone);
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     let userId = pedidoStored.user
 
-    User.findById(userId, (err, client) => {
-
-      if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
-      if(!client) return res.status(404).send({message:'El cliente no existe'})
-      client.pedidos.push(pedidoStored._id)
-      client.save((err)=>{
-        if(err)return res.status(500).send(err)
-        res.status(200).send(pedidoStored)
-        /*Pedido.findById(pedidoStored._id).populate({path:'user', select:['name', 'phone']}).exec((err, pedidoEnvio)=>{
-          var JsonPedido = JSON.stringify(pedidoEnvio)
-        //  firebase.SendNotificationDomiciliarios(config.state1,JsonPedido,"add")
-          res.status(200).send(pedidoStored)
-        })*/
-      })
-    })
+    res.status(200).send(pedidoStored)
   })
 }
 
