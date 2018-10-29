@@ -32,8 +32,11 @@ function savePedido(req,res){
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
 
+  console.log(pedidoJson.phone);
+
   let pedido = new Pedido(pedidoJson)
 
+console.log(pedido.phone);
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     let userId = pedidoStored.user
