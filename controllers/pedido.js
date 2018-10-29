@@ -38,7 +38,7 @@ function savePedido(req,res){
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     let userId = pedidoStored.user
 
-    res.status(200).send("Pedido registrado con éxito.")
+    res.status(200).send(pedidoStored)
   })
 }
 
