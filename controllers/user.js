@@ -61,51 +61,25 @@ function deleteUser(req,res){
   })
 }
 
-function signUp(req,res){
-  const user = new User()
-  user.email = req.body.email
-  user.password = req.body.password
-  user.name = req.body.name
-  user.avatar = req.body.avatar
-  user.phone = req.body.phone
-  user.address = req.body.address
-  user.signupDate = new Date()
-  user.lastLogin = new Date()
+function saveUser(req,res){
 
-  User.find({email: req.body.email}, (err,clien) =>{
+  let userJson = JSON.parse(req.body.userJson)
+  userJson.lastLogin = new Date()
+
+  let user = new user(userJson)
+
+  User.findOne({email: user.email}, (err,clien) =>{
     if(err) return res.status(500).send({message: err})
 
-    if(clien.length != 0) return res.status(501).send({message: 'EL correo ya existe en nuestra base de datos'})
+    if(!clien) {
+      user.save((err,userStored)=>{
+        if(err) return res.status(500).send({message: `Error registrando nuevo User: ${err}`})
 
-    user.save((err)=>{
-      if(err) return res.status(500).send({message: `Error registrando nuevo User: ${err}`})
-
-      res.status(201).send(user)
-    })
-  })
-}
-
-function signIn(req,res){
-  User.findOne({email: req.body.email}, (err, user)=>{
-    if(err) return res.status(500).send({message: err})
-    if(!user) return res.status(404).send({  message: 'No existe el usuario'})
-
-    user.comparePass(req.body.password,(isMatch)=>{
-      if(isMatch){
-        var update = {lastLogin:new Date()}
-        User.findByIdAndUpdate(user._id, update, (err, userUpdated) =>{
-          if(err) return res.status(500).send({message:`Error al editar el User en la base de datos ${err}`})
-
-          res.status(200).send({
-            token: service.createToken(user),
-            user: user
-          })
-
-        })
-      }else {
-        res.status(401).send({error: 'Contraseña incorrecta'})
-      }
-    })
+        res.status(201).send(userStored)
+      })
+    }else {
+      res.status(201).send(clien)
+    }
   })
 }
 
@@ -134,7 +108,6 @@ module.exports = {
   getUsers,
   deleteUser,
   updateUser,
-  signUp,
-  signIn,
+  saveUser,
   getCreate
 }
