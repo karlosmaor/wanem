@@ -42,7 +42,7 @@ function savePedido(req,res){
       if(err) return res.status(500).send(err)
 
       if(pedido.phone != undefined) client.phone = pedido.phone
-      if(pedido.address != undefined) client.address = pedido.addressEnd
+      if(pedido.addressEnd != undefined) client.address = pedido.addressEnd
       if(pedido.nombreUser != undefined) client.name = pedido.nombreUser
       client.pedidos.push(pedido._id)
 
