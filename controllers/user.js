@@ -67,7 +67,7 @@ function saveUser(req,res){
   let userJson = JSON.parse(req.body.userJson)
   userJson.lastLogin = new Date()
 
-  let user = new user(userJson)
+  let user = new User(userJson)
 
   User.findOne({email: user.email}, (err,clien) =>{
     if(err) return res.status(500).send({message: err})
