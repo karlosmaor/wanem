@@ -34,7 +34,7 @@ function savePedido(req,res){
 
   if(pedidoJson.productos.length > 0){
     pedidoJson.productos.forEach(function(prod){
-      prod.empresa = iden.split(",")[1]
+      prod.empresa = prod.iden.split(",")[1]
     })
   }
 
