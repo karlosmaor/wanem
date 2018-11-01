@@ -28,9 +28,15 @@ function getPedidos(req, res){
 }
 
 function savePedido(req,res){
-console.log(req.body);
+
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
+
+  if(pedidoJson.productos.length > 0){
+    pedidoJson.productos.forEach(function(prod){
+      prod.empresa = iden.split(",")[1]
+    })
+  }
 
   let pedido = new Pedido(pedidoJson)
 
