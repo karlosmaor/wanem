@@ -18,7 +18,7 @@ function getPedido(req,res){
 }
 
 function getPedidos(req, res){
-  Pedido.find({}).limit(15).sort('-date').exec((err, pedidos)=>{
+  Pedido.find({}).limit(15).sort('-date').populate('productos.empresa').xec((err, pedidos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(pedidos.length == 0)return res.status(501).send({message:'No hay entregas'})
