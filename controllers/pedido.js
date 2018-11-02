@@ -63,36 +63,14 @@ function savePedido(req,res){
 
 function updatePedido(req,res){
 
+  let pedidoJson = JSON.parse(req.body.pedidoJson)
   let pedidoId = req.params.pedidoId
-  let update = req.body
-  //if(req.body.positionStart != undefined) update.positionStart = JSON.parse(req.body.positionStart)
-//  if(req.body.positionEnd != undefined) update.positionEnd = JSON.parse(req.body.positionEnd)
 
-  Pedido.findByIdAndUpdate(pedidoId, update,  (err, pedidoUpdated) =>{
+  Pedido.findByIdAndUpdate(pedidoId, pedidoJson,  (err, pedidoUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
     if(pedidoUpdated == undefined) return res.status(404).send('No se encontró el pedido')
 
-    Pedido.findById(pedidoUpdated._id).populate('user', 'name').exec((err, pedidoNew)=>{
-      if(err) return res.status(500).send(err)
-      res.status(200).send(pedidoNew)
-
-      // if((pedidoUpdated.state == 0 && pedidoNew.state == 1)||(pedidoUpdated.state == 0 && pedidoNew.state == 4)) {
-      //   var JsonPedido = JSON.stringify(pedidoNew)
-      //   firebase.SendNotificationDomiciliarios(config.state1,JsonPedido, "delete")
-      // }
-      // if((pedidoUpdated.state == 1 && pedidoNew.state == 0)||(pedidoUpdated.state == 2 && pedidoNew.state == 0)) {
-      //   var JsonPedido = JSON.stringify(pedidoNew)
-      //   firebase.SendNotificationDomiciliarios(config.state1,JsonPedido, "add")
-      // }
-      // if (pedidoUpdated.state == 1 && pedidoNew.state == 2){
-      //   Domiciliario.findByIdAndUpdate(pedidoNew.domiciliario,{state: 3},(err, domiciliarioUpdated)=>{
-      //     if(err)return res.status(500).send(err)
-      //     res.status(200).send(pedidoNew)
-      //   })
-      // }else {
-      //   res.status(200).send(pedidoNew)
-      // }
-    })
+    res.status(200).send(pedidoUpdated)    
   })
 }
 
