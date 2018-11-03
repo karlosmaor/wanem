@@ -92,14 +92,10 @@ function signIn(req,res){
         Empresa.findByIdAndUpdate(empresa._id, update, (err, empresaUpdated) =>{
           if(err) return res.status(500).send({message:`Error al editar el Empresa en la base de datos ${err}`})
 
-          res.status(200).send({
-            token: service.createToken(empresa),
-            empresa: empresa
-          })
-
+          res.status(200).send(empresa)
         })
       }else {
-        res.status(401).send({error: 'Contraseña incorrecta'})
+        res.status(401).send({error: 'Contraseña incorrecta.'})
       }
     })
   })
