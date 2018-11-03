@@ -72,7 +72,7 @@ function saveUser(req,res){
     if(err) return res.status(500).send({message: err})
 
     if(!clien) {
-      userJson.signupDate = new Date()
+      user.signupDate = new Date()
       user.save((err,userStored)=>{
         if(err) return res.status(500).send({message: `Error registrando nuevo User: ${err}`})
 
