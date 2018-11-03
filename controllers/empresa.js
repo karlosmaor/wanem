@@ -82,6 +82,7 @@ function signUp(req,res){
 }
 
 function signIn(req,res){
+  console.log(req.body);
   Empresa.findOne({email: req.body.email}, (err, empresa)=>{
     if(err) return res.status(500).send({message: err})
     if(!empresa) return res.status(404).send({  message: 'No existe el usuario'})
