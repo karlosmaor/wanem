@@ -28,7 +28,7 @@ function getPedidos(req, res){
 }
 
 function savePedido(req,res){
-console.log(req.body);
+
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
 
@@ -39,7 +39,7 @@ console.log(req.body);
   }
 
   let pedido = new Pedido(pedidoJson)
-
+console.log(pedido);
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
 
