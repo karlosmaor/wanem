@@ -10,6 +10,7 @@ app.use('/info', expressStatic('./public'))
 app.use('/rex', expressStatic('./public/rex'))
 app.use('/conopizza', expressStatic('./public/conopizza'))
 app.use('/maxseguridad', expressStatic('./public/maxseguridad'))
+app.use('/misterdog', expressStatic('./public/misterdog'))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
