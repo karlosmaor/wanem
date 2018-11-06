@@ -42,7 +42,7 @@ function savePedido(req,res){
   }
 
   let pedido = new Pedido(pedidoJson)
-  
+
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     if(!pedidoStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
@@ -74,6 +74,7 @@ function updatePedido(req,res){
 
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   let pedidoId = req.params.pedidoId
+  delete pedidoJson.user
 
   Pedido.findByIdAndUpdate(pedidoId, pedidoJson,  (err, pedidoUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
