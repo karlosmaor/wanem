@@ -39,10 +39,11 @@ function savePedido(req,res){
   }
 
   let pedido = new Pedido(pedidoJson)
-
+console.log(pedido);
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
-    console.log(pedidoStored);
+    if(!pedidoStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+    
     if(pedido.user != undefined){
       let userId = pedidoStored.user
 
