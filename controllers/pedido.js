@@ -31,6 +31,9 @@ function savePedido(req,res){
 
   let pedidoJson = JSON.parse(req.body.pedidoJson)
   pedidoJson.date = new Date()
+  delete pedidoJson._id
+
+  if(pedidoJson.user.length < 2) delete pedidoJson.user
 
   if(pedidoJson.productos.length > 0){
     pedidoJson.productos.forEach(function(prod){
@@ -43,7 +46,7 @@ console.log(pedido);
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
     if(!pedidoStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
-    
+
     if(pedido.user != undefined){
       let userId = pedidoStored.user
 
