@@ -42,22 +42,27 @@ function savePedido(req,res){
 
   pedido.save((err, pedidoStored)=>{
     if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
-    let userId = pedidoStored.user
 
-    User.findById(userId, (err, client)=>{
-      if(err) return res.status(500).send(err)
+    if(pedidoStored.user.length > 0){
+      let userId = pedidoStored.user
 
-      if(pedido.phone != undefined) client.phone = pedido.phone
-      if(pedido.addressEnd != undefined) client.address = pedido.addressEnd
-      if(pedido.nombreUser != undefined) client.name = pedido.nombreUser
-      client.pedidos.push(pedido._id)
+      User.findById(userId, (err, client)=>{
+        if(err) return res.status(500).send(err)
 
-      client.save((err)=>{
-        if(err)return res.status(500).send(err)
+        if(pedido.phone != undefined) client.phone = pedido.phone
+        if(pedido.addressEnd != undefined) client.address = pedido.addressEnd
+        if(pedido.nombreUser != undefined) client.name = pedido.nombreUser
+        client.pedidos.push(pedido._id)
 
-        res.status(200).send(pedidoStored)
+        client.save((err)=>{
+          if(err)return res.status(500).send(err)
+
+          res.status(200).send(pedidoStored)
+        })
       })
-    })
+    }else{
+      res.status(200).send(pedidoStored)
+    }
   })
 }
 
@@ -70,7 +75,7 @@ function updatePedido(req,res){
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
     if(pedidoUpdated == undefined) return res.status(404).send('No se encontró el pedido')
 
-    res.status(200).send(pedidoUpdated)    
+    res.status(200).send(pedidoUpdated)
   })
 }
 

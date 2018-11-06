@@ -68,8 +68,6 @@ EmpresaSchema.pre('save',function(next){
 
 EmpresaSchema.methods.comparePass = function (pass,isMatch) {
   mongoose.model('Empresa', EmpresaSchema).findOne({email: this.email},'password', (err, empresa) => {
-    console.log(pass);
-    console.log(empresa.password);
         bcrypt.compare(pass, empresa.password, function(err, res) {
           if (err)return console.log({ error: err })
           isMatch(res)
