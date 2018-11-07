@@ -1,0 +1,13 @@
+{
+"companyName": "DefaultCompany",
+"productName": "WanemEmpresas",
+"dataUrl": "WanemWebGL.data.unityweb",
+"asmCodeUrl": "WanemWebGL.asm.code.unityweb",
+"asmMemoryUrl": "WanemWebGL.asm.memory.unityweb",
+"asmFrameworkUrl": "WanemWebGL.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
