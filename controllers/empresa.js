@@ -26,7 +26,7 @@ function getEmpresas(req, res){
 }
 
 function updateEmpresa(req,res){
-  let empresaJson = JSON.parse(req.body.empresaJson)    
+  let empresaJson = JSON.parse(req.body.empresaJson)
   delete empresaJson.eventos
   if(empresaJson.password.length == 0){
     delete empresaJson.password
@@ -82,7 +82,7 @@ function signUp(req,res){
 }
 
 function signIn(req,res){
-  console.log(req.body);
+
   Empresa.findOne({email: req.body.email}, (err, empresa)=>{
     if(err) return res.status(500).send({error: err})
     if(!empresa) return res.status(404).send({  message: 'No existe el usuario'})
