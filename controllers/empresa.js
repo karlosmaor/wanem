@@ -84,19 +84,19 @@ function signUp(req,res){
 function signIn(req,res){
 
   Empresa.findOne({email: req.body.email}, (err, empresa)=>{
-    if(err) return res.status(500).send({error: err})
-    if(!empresa) return res.status(404).send({  message: 'No existe el usuario'})
+    if(err) return res.status(205).send({error: err})
+    if(!empresa) return res.status(204).send({  message: 'No existe el usuario'})
 
     empresa.comparePass(req.body.password,(isMatch)=>{
       if(isMatch){
         var update = {lastLogin:new Date()}
         Empresa.findByIdAndUpdate(empresa._id, update, (err, empresaUpdated) =>{
-          if(err) return res.status(500).send({message:`Error al editar el Empresa en la base de datos ${err}`})
+          if(err) return res.status(205).send({message:`Error al editar el Empresa en la base de datos ${err}`})
 
           res.status(200).send(empresa)
         })
       }else {
-        res.status(401).send({error: 'Contraseña incorrecta.'})
+        res.status(206).send({error: 'Contraseña incorrecta.'})
       }
     })
   })
