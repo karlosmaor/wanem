@@ -16,6 +16,7 @@ const EmpresaSchema = new Schema({
   category: String,
   tipo : String,
   visible: {type: Boolean, default: true},
+  orden: {type: Number, default: 100},
   pedidos: [{type: Schema.Types.ObjectId, ref: 'Pedido'}],
   ImagesPromo : [{
     img: String,
@@ -44,7 +45,7 @@ const EmpresaSchema = new Schema({
     lat: {type: Number, default: 0.0},
     lng: {type: Number, default: 0.0}
   },
-  schedule: [{hs:Number,ms:Number,he:Number,me:Number}],
+  schedule: [{hs:Number,ms:Number,he:Number,me:Number,hs2:Number,ms2:Number,he2:Number,me2:Number}],
   signupDate: Date,
   lastLogin: Date
 })
