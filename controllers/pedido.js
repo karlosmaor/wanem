@@ -23,7 +23,7 @@ function getPedidos(req, res){
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(pedidos.length == 0)return res.status(501).send({message:'No hay entregas'})
 
-    res.status(200).send(pedidos)
+    res.status(501).send(pedidos)
   })
 }
 
