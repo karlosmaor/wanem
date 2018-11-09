@@ -28,11 +28,13 @@ function getPedidos(req, res){
 }
 
 function getPedidosEmpresas(req, res){
+  var start = new Date();
+  start.setHours(0,0,0,0);
+  var end = new Date();
+  end.setHours(23,59,59,999);
   Pedido.find({
-    state: {
-    '$gte': 1,
-    '$lte': 3
-    }
+    state: {'$gte': 1,'$lte': 3},
+    date: {'$gte': start,'$lte': end}
   }).limit(15).sort('-date').populate('productos.empresa').exec((err, pedidos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
