@@ -27,6 +27,21 @@ function getPedidos(req, res){
   })
 }
 
+function getPedidosEmpresas(req, res){
+  Pedido.find({
+    state: {
+    '$gte': 1,
+    '$lte': 3
+    }
+  }).limit(15).sort('-date').populate('productos.empresa').exec((err, pedidos)=>{
+
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(pedidos.length == 0)return res.status(501).send({message:'No hay entregas'})
+
+    res.status(200).send(pedidos)
+  })
+}
+
 function savePedido(req,res){
 
   let pedidoJson = JSON.parse(req.body.pedidoJson)
@@ -126,6 +141,7 @@ function searchState(req, res){
 module.exports ={
   getPedido,
   getPedidos,
+  getPedidosEmpresas,
   savePedido,
   updatePedido,
   deletePedido,

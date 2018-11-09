@@ -23,6 +23,7 @@ api.delete('/user/:userId', UserCtrl.deleteUser)
 //---------------Rutas para pedidos----------//
 
 api.get('/pedidos', PedidoCtrl.getPedidos)
+api.get('/pedidos/empresa', PedidoCtrl.getPedidosEmpresas)
 api.get('/pedido/:pedidoId', PedidoCtrl.getPedido)
 api.post('/pedido', PedidoCtrl.savePedido)
 api.post('/pedido/buscar/fecha', PedidoCtrl.search)
