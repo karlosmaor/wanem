@@ -45,7 +45,16 @@ const EmpresaSchema = new Schema({
     lat: {type: Number, default: 0.0},
     lng: {type: Number, default: 0.0}
   },
-  schedule: [{hs:Number,ms:Number,he:Number,me:Number,hs2:Number,ms2:Number,he2:Number,me2:Number}],
+  schedule: [{
+    hs:{type: Number, default: 0},
+    ms:{type: Number, default: 0},
+    he:{type: Number, default: 0},
+    me:{type: Number, default: 0},
+    hs2:{type: Number, default: 0},
+    ms2:{type: Number, default: 0},
+    he2:{type: Number, default: 0},
+    me2:{type: Number, default: 0}
+  }],
   signupDate: Date,
   lastLogin: Date
 })
