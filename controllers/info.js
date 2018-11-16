@@ -52,7 +52,7 @@ function saveInfo(req,res){
 
   let info = new Info(infoJson)
 
-  Empresa.find({visible: true},'category').sort('orden').exec((err, empresas)=>{
+  Empresa.find({visible: true},'category').sort('-orden').exec((err, empresas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
     info.categorias.forEach(function(cat){
