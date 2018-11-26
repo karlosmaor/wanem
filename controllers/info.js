@@ -21,7 +21,7 @@ function getInformacion(req, res){
         })
       })
 
-      Evento.find({}, 'ImagesPromo', (err, eventos)=>{
+      Evento.find({date: {'$gte': new Date()}}, 'ImagesPromo', (err, eventos)=>{
         if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
         eventos.forEach(function(element){
