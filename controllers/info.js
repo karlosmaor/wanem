@@ -21,15 +21,15 @@ function getInformacion(req, res){
         })
       })
 
-      Evento.find({date: {'$lte': new Date()}}, (err, eventos)=>{
+      Evento.find({date: {'$gte': new Date()}}, (err, eventos)=>{
         if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
         eventos.forEach(function(element){
           infos[0].ImagesPromo.push(element.ImagesPromo)
         })
         const categor = infos[0].categorias.filter(x => x.visible == true)
-        if(categor.find(x => x.name == "Eventos") != undefined) categor.find(x => x.name == "Eventos").empresas = eventos
-        infos[0].categorias = categor;
+        infos[0].categorias = categor
+        infos[0].eventos = eventos
         res.status(200).send(infos[0])
       })
     })
