@@ -65,16 +65,10 @@ function saveInfo(req,res){
         info.categorias.find(x => x.name == empre.category).empresas.push(empre._id)
       }
     })
+    info.save((err, infoStored)=>{
+      if(err)return res.status(500).send({message :`Error al guardar la información en la base de datos: ${err}`})
 
-    Evento.find({}, '_id', (err, eventos)=>{
-      if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
-      info.eventos = eventos
-
-      info.save((err, infoStored)=>{
-        if(err)return res.status(500).send({message :`Error al guardar la información en la base de datos: ${err}`})
-
-        res.status(200).send({message:'Información guardada'})
-      })
+      res.status(200).send({message:'Información guardada'})
     })
   })
 }
