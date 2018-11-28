@@ -43,6 +43,17 @@ api.post('/empresa/:empresaId', EmpresaCtrl.updateEmpresa)
 api.put('/empresa/:empresaId', EmpresaCtrl.updateEmpresa)
 api.delete('/empresa/:empresaId', EmpresaCtrl.deleteEmpresa)
 
+//--------------Rutas para domiciliario-------------//
+
+api.get('/domiciliarios', DomiciliarioCtrl.getDomiciliarios)
+api.get('/domiciliario/:domiciliarioId', DomiciliarioCtrl.getDomiciliario)
+api.post('/domiciliario/signup', DomiciliarioCtrl.signUp)
+api.post('/domiciliario/signin', DomiciliarioCtrl.signIn)
+api.post('/domiciliario/search', DomiciliarioCtrl.search)
+api.post('/domiciliario/:domiciliarioId', DomiciliarioCtrl.updateDomiciliario)
+api.put('/domiciliario/:domiciliarioId', DomiciliarioCtrl.updateDomiciliario)
+api.delete('/domiciliario/:domiciliarioId', DomiciliarioCtrl.deleteDomiciliario)
+
 //---------------Rutas para eventos----------//
 
 api.get('/eventos', EventoCtrl.getEventos)
