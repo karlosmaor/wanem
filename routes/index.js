@@ -9,6 +9,7 @@ const PedidoCtrl  = require('../controllers/pedido')
 const EmpresaCtrl  = require('../controllers/empresa')
 const EventoCtrl = require('../controllers/evento')
 const InfoCtrl = require('../controllers/info')
+const DomiciliarioCtrl = require('../controllers/domiciliario')
 
 //----------------Rutas Users-------------//
 
