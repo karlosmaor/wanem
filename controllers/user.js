@@ -79,7 +79,12 @@ function saveUser(req,res){
         res.status(201).send(userStored)
       })
     }else {
-      res.status(201).send(clien)
+      clien.lastLogin = new Date()
+      clien.save((err,userStored)=>{
+        if(err) return res.status(500).send({message: `Error registrando nuevo User: ${err}`})
+
+        res.status(201).send(clien)
+      })
     }
   })
 }
