@@ -28,12 +28,18 @@ function getPedidos(req, res){
 }
 
 function getPedidosEmpresas(req, res){
-  var start = new Date();
-  start.setHours(5,0,0,0);
-  var end = new Date();
-  end.setHours(start.getHours()+24);
+  var fecha = new Date()
+  var start = new Date()
+  var end = new Date()
+  start.setHours(5,0,0,0)
+  end.setHours(5,0,0,0)
+  if(fecha<start){
+    start.setDays(start.getDays()-1)
+  }else {
+    end.setDays(end.getDays()+1)
+  }
 
-  res.status(200).send({inicio:start,fin:end})
+  res.status(200).send({actual:fecha,inicio:start,fin:end})
   /*Pedido.find({
     state: {'$gte': 1,'$lte': 3},
     date: {'$gte': start,'$lte': end}
