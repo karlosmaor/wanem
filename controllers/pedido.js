@@ -40,7 +40,7 @@ function getPedidosEmpresas(req, res){
   }
   Pedido.find({
     state: {'$gte': 1,'$lte': 3},
-    date: {'$gte': start}
+    date: {'$gte': start,'$lte': end}
   }).limit(15).sort('-date').populate('productos.empresa').exec((err, pedidos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
