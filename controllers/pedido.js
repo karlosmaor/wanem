@@ -38,18 +38,16 @@ function getPedidosEmpresas(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-
-  res.status(200).send({actual:fecha,inicio:start,fin:end})
-  /*Pedido.find({
+  Pedido.find({
     state: {'$gte': 1,'$lte': 3},
-    date: {'$gte': start,'$lte': end}
+    date: {'$gte': start}
   }).limit(15).sort('-date').populate('productos.empresa').exec((err, pedidos)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(pedidos.length == 0)return res.status(501).send({message:'No hay entregas'})
 
     res.status(200).send(pedidos)
-  })*/
+  })
 }
 
 function savePedido(req,res){
