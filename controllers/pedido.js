@@ -34,9 +34,9 @@ function getPedidosEmpresas(req, res){
   start.setHours(5,0,0,0)
   end.setHours(5,0,0,0)
   if(fecha<start){
-    start.setDays(start.getDays()-1)
+    start.setHours(start.getHours()-24)
   }else {
-    end.setDays(end.getDays()+1)
+    end.setHours(end.getHours()+24)
   }
 
   res.status(200).send({actual:fecha,inicio:start,fin:end})
