@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 
 const PedidoSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'},
+  domiciliario: {type: Schema.Types.ObjectId, ref: 'Domiciliario'},
   addressEnd: String,
   phone: String,
   nombreUser: String,

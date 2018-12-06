@@ -7,6 +7,7 @@ const bcrypt = require('bcrypt-nodejs')
 const DomiciliarioSchema = new Schema({
   email: {type: String, unique: true, required: true, lowercase: true},
   password: {type:String, select:false, required: true},
+  cedula:String,
   name: String,
   avatar: String,
   phone: String,
