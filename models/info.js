@@ -12,7 +12,8 @@ const InfoSchema = new Schema({
   valorDomicilio2: Number,
   ImagesPromo : [{
     img: String,
-    iden: String
+    iden: String,
+    pos: Number
   }],
   categorias: [{
     name: String,

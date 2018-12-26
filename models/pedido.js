@@ -13,6 +13,9 @@ const PedidoSchema = new Schema({
   category: String,
   state: {type:Number, default: 0},
   modoPago: String,
+  Valor_Domicilio: {type: Number, default: 0},
+  Valor_Productos: {type: Number, default: 0},
+  Valor_Tarjeta: {type: Number, default: 0},
   productos: [{
     nombre: String,
     descripcion: String,

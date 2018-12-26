@@ -12,7 +12,8 @@ const EventoSchema = new Schema({
   date: Date,
   ImagesPromo: {
     img: String,
-    iden: String
+    iden: String,
+    pos: Number
   },
   caracteristicas: [{
     nombre: String,

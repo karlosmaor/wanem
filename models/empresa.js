@@ -20,7 +20,8 @@ const EmpresaSchema = new Schema({
   pedidos: [{type: Schema.Types.ObjectId, ref: 'Pedido'}],
   ImagesPromo : [{
     img: String,
-    iden: String
+    iden: String,
+    pos: Number
   }],
   eventos: [{type: Schema.Types.ObjectId, ref: 'Evento'}],
   categorias: [{
