@@ -21,6 +21,9 @@ function getInformacion(req, res){
         })
       })
 
+      const imagesOrder = infos[0].ImagesPromo.sort((a, b) => Number(a.pos) - Number(b.pos))
+      infos[0].ImagesPromo = imagesOrder
+
       Evento.find({date: {'$gte': new Date()}}, (err, eventos)=>{
         if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
 
