@@ -68,7 +68,7 @@ function savePedido(req,res){
  fetch('http://paramismejoresamigos.top/wanem/enviarmail.php', {
    method: 'POST',
    headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
-   body: 'pedido='.concat(req.body.pedidoJson)
+   body: 'pedido=Hay un nuevo Pedido, revisen el sistema'
 }).then(res=>res.json())
   .then(res => console.log(res));
 console.log('pedido='.concat(req.body.pedidoJson))
