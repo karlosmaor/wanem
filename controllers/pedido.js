@@ -71,7 +71,7 @@ function savePedido(req,res){
    body: 'pedido='.concat(req.body.pedidoJson)
 }).then(res=>res.json())
   .then(res => console.log(res));
-console.log(JSON.stringify({pedido: 'hola perrito'}));
+console.log('pedido='.concat(req.body.pedidoJson))
 //--------------------------------------------------------------------
   let pedido = new Pedido(pedidoJson)
 
