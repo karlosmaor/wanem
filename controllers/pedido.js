@@ -66,12 +66,9 @@ function savePedido(req,res){
   }
 //-------------Envio de emails-----------------------------------
  fetch('http://paramismejoresamigos.top/wanem/enviarmail.php', {
-  method: 'POST',
-  headers: {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  body: JSON.stringify({pedido: 'hola perrito'})
+   method: 'POST',
+   headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
+   body: 'pedido=holiiii'
 }).then(res=>res.json())
   .then(res => console.log(res));
 console.log(JSON.stringify({pedido: 'hola perrito'}));
