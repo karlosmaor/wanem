@@ -71,7 +71,7 @@ function savePedido(req,res){
     'Accept': 'application/json, text/plain, */*',
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({pedido: 'hola perrito'})
+  body: {pedido: 'hola perrito'}
 }).then(res=>res.json())
   .then(res => console.log(res));
 console.log(JSON.stringify({pedido: 'hola perrito'}));
