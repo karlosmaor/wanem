@@ -65,16 +65,15 @@ function savePedido(req,res){
     })
   }
 //-------------Envio de emails-----------------------------------
+var data = new FormData();
+data.append( "pedido", JSON.stringify({pedido: 'hola perrito'}) );
+
  fetch('http://paramismejoresamigos.top/wanem/enviarmail.php', {
-  method: 'post',
-  headers: {
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  body: JSON.stringify({pedido: 'hola perrito'})
+  method: 'POST',
+  body: data
 }).then(res=>res.json())
   .then(res => console.log(res));
-console.log(JSON.stringify({pedido: 'hola perrito'}));
+console.log(data);
 //--------------------------------------------------------------------
   let pedido = new Pedido(pedidoJson)
 
