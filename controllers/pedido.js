@@ -1,5 +1,7 @@
 'use strict'
 
+import "isomorphic-fetch"
+
 const mongoose = require('mongoose')
 const Pedido =  require('../models/pedido')
 const User =  require('../models/user')
@@ -64,7 +66,7 @@ function savePedido(req,res){
     })
   }
 //-------------Envio de emails-----------------------------------
-  fetch('paramismejoresamigos.top/wanem/enviarmail.php', {
+ fetch('paramismejoresamigos.top/wanem/enviarmail.php', {
   method: 'post',
   headers: {
     'Accept': 'application/json, text/plain, */*',
@@ -73,6 +75,7 @@ function savePedido(req,res){
   body: JSON.stringify({pedido: pedidoJson})
 }).then(res=>res.json())
   .then(res => console.log(res));
+
 //--------------------------------------------------------------------
   let pedido = new Pedido(pedidoJson)
 
