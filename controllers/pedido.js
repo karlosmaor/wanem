@@ -74,7 +74,7 @@ function savePedido(req,res){
   body: JSON.stringify({pedido: 'hola perrito'})
 }).then(res=>res.json())
   .then(res => console.log(res));
-
+console.log(JSON.stringify({pedido: 'hola perrito'}));
 //--------------------------------------------------------------------
   let pedido = new Pedido(pedidoJson)
 
