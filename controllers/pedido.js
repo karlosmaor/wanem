@@ -65,7 +65,7 @@ function savePedido(req,res){
     })
   }
 //-------------Envio de emails-----------------------------------
- fetch('paramismejoresamigos.top/wanem/enviarmail.php', {
+ fetch('http://paramismejoresamigos.top/wanem/enviarmail.php', {
   method: 'post',
   headers: {
     'Accept': 'application/json, text/plain, */*',
