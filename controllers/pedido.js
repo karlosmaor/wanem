@@ -1,7 +1,6 @@
 'use strict'
 
-import "isomorphic-fetch"
-
+require('isomorphic-fetch')
 const mongoose = require('mongoose')
 const Pedido =  require('../models/pedido')
 const User =  require('../models/user')
