@@ -69,9 +69,9 @@ function savePedido(req,res){
   method: 'post',
   headers: {
     'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/x-www-form-urlencoded'
   },
-  body: {pedido: 'hola perrito'}
+  body: {'pedido': 'hola perrito'}
 }).then(res=>res.json())
   .then(res => console.log(res));
 console.log(JSON.stringify({pedido: 'hola perrito'}));
