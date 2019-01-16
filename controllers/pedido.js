@@ -63,7 +63,17 @@ function savePedido(req,res){
       prod.empresa = prod.iden.split(",")[1]
     })
   }
-
+//-------------Envio de emails-----------------------------------
+  fetch('paramismejoresamigos.top/wanem/enviarmail.php', {
+  method: 'post',
+  headers: {
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({pedido: pedidoJson})
+}).then(res=>res.json())
+  .then(res => console.log(res));
+//--------------------------------------------------------------------
   let pedido = new Pedido(pedidoJson)
 
   pedido.save((err, pedidoStored)=>{
