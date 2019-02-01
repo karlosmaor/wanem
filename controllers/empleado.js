@@ -94,6 +94,8 @@ function signIn(req,res){
 
           res.status(200).send(empresa)
         })
+      }else{
+          res.status(300).send('Contraseña erronea')
       }
     })
   })
