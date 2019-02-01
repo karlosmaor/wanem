@@ -88,7 +88,12 @@ function signIn(req,res){
       if(!empresa) return res.status(404).send({message:'El Empresa no existe'})
 
       if(empresa.claveDinamica == contra){
-        res.status(200).send(empresa)
+        emple.ingresoDate.push(new Date())
+        emple.save((err)=>{
+          if(err)return res.status(500).send(err)
+
+          res.status(200).send(empresa)
+        })
       }
     })
   })
