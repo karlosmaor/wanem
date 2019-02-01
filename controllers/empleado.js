@@ -93,7 +93,10 @@ function signIn(req,res){
         emple.save((err)=>{
           if(err)return res.status(500).send(err)
 
-          res.status(200).send(empresa)
+          res.status(200).send({
+            empleado:emple,
+            empresa:empresa
+          })
         })
       }else{
           res.status(300).send('Contraseña erronea')
