@@ -64,11 +64,11 @@ function saveComanda(req,res){
 
   let comanda = new Comanda(comandaJson)
 
-  Comanda.count({state:{'$lte': 6}}, funtion(err,c){
-    if(err)return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
+  Comanda.count({state:{'$lte': 6}}, (err,c) => {
+    if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
     comanda.cod = c
-
+    
     comanda.save((err, comandaStored)=>{
       if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
       if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
