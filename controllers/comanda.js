@@ -68,7 +68,7 @@ function saveComanda(req,res){
     if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
     comanda.cod = c
-    
+
     comanda.save((err, comandaStored)=>{
       if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
       if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
@@ -103,11 +103,28 @@ function saveComanda(req,res){
     })
   })
 }
+/* states:
+0 = Pedido nuevo
+1 = Pedido Impreso
+2 = Pedido entregado
+3 = Pedido Pendiente
+4 = Pedido pagado
+5 = Pedido fallido
+10 = base
+11 = Gasto
+12 = Ingreso
+*/
 
 function updateComanda(req,res){
 
   let comandaJson = JSON.parse(req.body.comandaJson)
   let comandaId = req.params.comandaId
+
+  if(comandaJson.state == 2){
+    comandaJson.horaEntrega = new Date()
+  }else if(comandaJson.state == 4){
+    comandaJson.horaPago = new Date()
+  }
 
   Comanda.findByIdAndUpdate(comandaId, comandaJson,  (err, comandaUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
