@@ -52,8 +52,8 @@ function deleteEmpleado(req,res){
 function saveEmpleado(req,res){
 
   let empleadoJson = JSON.parse(req.body.empleadoJson)
-console.log(empleadoJson.email);
-/*  let empleado = new Empleado(empleadoJson)
+
+  let empleado = new Empleado(empleadoJson)
 
   Empleado.findOne({email: empleado.email},(err,clien) =>{
     if(err) return res.status(500).send({message: err})
@@ -72,7 +72,7 @@ console.log(empleadoJson.email);
         res.status(201).send(clien)
       })
     }
-  })*/
+  })
 }
 
 function signIn(req,res){
