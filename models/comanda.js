@@ -6,11 +6,14 @@ const Schema = mongoose.Schema
 const ComandaSchema = new Schema({
   mesero: {type: Schema.Types.ObjectId, ref: 'Empleado'},
   empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
+  cod: Number,
   addressEnd: String,
   addressStart: String,
   phone: String,
   nombreUser: String,
   date: Date,
+  horaEntrega: Date,
+  horaPago: Date,
   category: String,
   state: {type:Number, default: 0},
   modoPago: String,
@@ -22,6 +25,7 @@ const ComandaSchema = new Schema({
     imagen: String,
     precio: Number,
     cantidad: Number,
+    entregado: {type: Boolean, default: false},
     caracteristicas: [{
       nombre: String,
       multiSeleccion: Boolean,

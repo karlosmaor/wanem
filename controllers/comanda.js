@@ -64,37 +64,43 @@ function saveComanda(req,res){
 
   let comanda = new Comanda(comandaJson)
 
-  comanda.save((err, comandaStored)=>{
-    if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
-    if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+  Comanda.count({state:{'$lte': 6}}, funtion(err,c){
+    if(err)return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
-    if(comanda.phone != undefined){
+    comanda.cod = c
 
-      User.findOne({email: comanda.phone}, (err, client)=>{
-        if(err) return res.status(500).send(err)
+    comanda.save((err, comandaStored)=>{
+      if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+      if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
 
-        if(!client){
-          let newUser = new User({email: comanda.phone, name: comanda.nombreUser, phone: comanda.phone, address: comanda.addressEnd, city: comanda.city, signupDate: new Date(), lastLogin: new Date()})
+      if(comanda.phone != undefined){
 
-          newUser.save((err,userStored)=>{
-            if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+        User.findOne({email: comanda.phone}, (err, client)=>{
+          if(err) return res.status(500).send(err)
 
-            res.status(200).send(comandaStored)
-          })
-        }else {
-          client.lastLogin = new Date()
-          client.address = comanda.addressEnd
-          client.name = comanda.nombreUser
-          client.save((err,userStored)=>{
-            if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+          if(!client){
+            let newUser = new User({email: comanda.phone, name: comanda.nombreUser, phone: comanda.phone, address: comanda.addressEnd, city: comanda.city, signupDate: new Date(), lastLogin: new Date()})
 
-            res.status(200).send(comandaStored)
-          })
-        }
-      })
-    }else{
-      res.status(200).send(comandaStored)
-    }
+            newUser.save((err,userStored)=>{
+              if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+
+              res.status(200).send(comandaStored)
+            })
+          }else {
+            client.lastLogin = new Date()
+            client.address = comanda.addressEnd
+            client.name = comanda.nombreUser
+            client.save((err,userStored)=>{
+              if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+
+              res.status(200).send(comandaStored)
+            })
+          }
+        })
+      }else{
+        res.status(200).send(comandaStored)
+      }
+    })
   })
 }
 
