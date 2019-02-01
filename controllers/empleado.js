@@ -81,6 +81,7 @@ function signIn(req,res){
 
   Empleado.findOne({email: usuario}, (err,emple) => {
     if(err) return res.status(500).send({message: err})
+    if(!emple) return res.status(500).send('El empleado no está registrado')
 
     Empresa.findById(emple.empresa, (err, empresa) => {
 
