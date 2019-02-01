@@ -3,25 +3,23 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const PedidoSchema = new Schema({
-  user: {type: Schema.Types.ObjectId, ref: 'User'},
+const ComandaSchema = new Schema({
+  mesero: {type: Schema.Types.ObjectId, ref: 'Empleado'},
+  empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
   addressEnd: String,
+  addressStart: String,
   phone: String,
   nombreUser: String,
   date: Date,
   category: String,
   state: {type:Number, default: 0},
   modoPago: String,
-  Valor_Domicilio: {type: Number, default: 0},
-  Valor_Productos: {type: Number, default: 0},
+  Valor_Efectivo: {type: Number, default: 0},
   Valor_Tarjeta: {type: Number, default: 0},
   productos: [{
     nombre: String,
     descripcion: String,
-    address: String,
-    empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
     imagen: String,
-    iden: String,
     precio: Number,
     cantidad: Number,
     caracteristicas: [{
@@ -36,16 +34,8 @@ const PedidoSchema = new Schema({
   }],
   total: Number,
   comentario: String,
-  city: String,
-  positionStart: {
-    lat: {type: Number, default: 0.0},
-    lng: {type: Number, default: 0.0}
-  },
-  positionEnd: {
-    lat: {type: Number, default: 0.0},
-    lng: {type: Number, default: 0.0}
-  }
+  city: String
 })
 
 
-module.exports = mongoose.model('Pedido',PedidoSchema)
+module.exports = mongoose.model('Comanda',ComandaSchema)

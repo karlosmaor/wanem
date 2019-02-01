@@ -5,11 +5,11 @@ const api = express.Router()
 //const auth = require('../middlewares/auth')
 
 const UserCtrl = require('../controllers/user')
+const EmpleadoCtrl = require('../controllers/empleado')
 const PedidoCtrl  = require('../controllers/pedido')
 const EmpresaCtrl  = require('../controllers/empresa')
 const EventoCtrl = require('../controllers/evento')
 const InfoCtrl = require('../controllers/info')
-const DomiciliarioCtrl = require('../controllers/domiciliario')
 
 //----------------Rutas Users-------------//
 
@@ -20,6 +20,16 @@ api.post('/user/get/create', UserCtrl.getCreate)
 api.post('/user/:userId', UserCtrl.updateUser)
 api.put('/user/:userId', UserCtrl.updateUser)
 api.delete('/user/:userId', UserCtrl.deleteUser)
+
+//----------------Rutas Empleados-------------//
+
+api.get('/empleados', EmpleadoCtrl.getEmpleados)
+api.get('/empleado/:empleadoId', EmpleadoCtrl.getEmpleado)
+api.post('/empleado', EmpleadoCtrl.saveEmpleado)
+api.post('/empleado/signin/empleado', EmpleadoCtrl.signIn)
+api.post('/empleado/:empleadoId', EmpleadoCtrl.updateEmpleado)
+api.put('/empleado/:empleadoId', EmpleadoCtrl.updateEmpleado)
+api.delete('/empleado/:empleadoId', EmpleadoCtrl.deleteEmpleado)
 
 //---------------Rutas para pedidos----------//
 
@@ -33,6 +43,18 @@ api.post('/pedido/:pedidoId', PedidoCtrl.updatePedido)
 api.put('/pedido/:pedidoId', PedidoCtrl.updatePedido)
 api.delete('/pedido/:pedidoId', PedidoCtrl.deletePedido)
 
+//---------------Rutas para comandas----------//
+
+api.get('/comandas', ComandaCtrl.getComandas)
+api.get('/comandas/dia/:empresaId', ComandaCtrl.getComandasDia)
+api.get('/comanda/:comandaId', ComandaCtrl.getComanda)
+api.post('/comanda', ComandaCtrl.saveComanda)
+api.post('/comanda/buscar/fecha', ComandaCtrl.search)
+api.post('/comanda/search/state', ComandaCtrl.searchState)
+api.post('/comanda/:comandaId', ComandaCtrl.updateComanda)
+api.put('/comanda/:comandaId', ComandaCtrl.updateComanda)
+api.delete('/comanda/:comandaId', ComandaCtrl.deleteComanda)
+
 //--------------Rutas para empresa-------------//
 
 api.get('/empresas', EmpresaCtrl.getEmpresas)
@@ -44,16 +66,7 @@ api.post('/empresa/:empresaId', EmpresaCtrl.updateEmpresa)
 api.put('/empresa/:empresaId', EmpresaCtrl.updateEmpresa)
 api.delete('/empresa/:empresaId', EmpresaCtrl.deleteEmpresa)
 
-//--------------Rutas para domiciliario-------------//
 
-api.get('/domiciliarios', DomiciliarioCtrl.getDomiciliarios)
-api.get('/domiciliario/:domiciliarioId', DomiciliarioCtrl.getDomiciliario)
-api.post('/domiciliario/signup', DomiciliarioCtrl.signUp)
-api.post('/domiciliario/signin', DomiciliarioCtrl.signIn)
-api.post('/domiciliario/search', DomiciliarioCtrl.search)
-api.post('/domiciliario/:domiciliarioId', DomiciliarioCtrl.updateDomiciliario)
-api.put('/domiciliario/:domiciliarioId', DomiciliarioCtrl.updateDomiciliario)
-api.delete('/domiciliario/:domiciliarioId', DomiciliarioCtrl.deleteDomiciliario)
 
 //---------------Rutas para eventos----------//
 

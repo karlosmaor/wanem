@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt-nodejs')
 const EmpresaSchema = new Schema({
   email: {type: String, unique: true, required: true, lowercase: true},
   password: {type:String, select:false, required: true},
+  claveDinamica: String,
+  claveCajero: {type:String, select:false},
   name: String,
   avatar: String,
   address: [String],
