@@ -51,7 +51,7 @@ function getComandasDia(req, res){
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
 
-    const comandasNuevas = comandas.filter(x => x.state == 0)
+    const comandasNuevas = comandas.filter(x => x.state == 1)
     if(comandasNuevas.length>0){
         res.status(200).send(comandas)
     }else{
