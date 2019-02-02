@@ -215,11 +215,9 @@ function searchState(req, res){
 function CargarBase(req,res) {
   Comanda.find({state:{'$gte': 4}, empresa: req.body.empresaId, addressStart: req.body.addressStart}).limit(1).sort('-date').exec((err, comandas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(comandas.length == 0)return res.status(501).send({message:'No hay comandas'})
 
-    var dinero = 0
-    if(comandas.length != 0){
-      dinero = comandas[0].dineroBase
-      res.status(200).send(dinero)
+    res.status(200).send(comandas[0].dineroBase)      
     }
   })
 }
