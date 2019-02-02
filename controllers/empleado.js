@@ -93,6 +93,10 @@ function signIn(req,res){
         emple.save((err)=>{
           if(err)return res.status(500).send(err)
 
+          if(emple.tipo == "Cajero" && empresa.claveCajero == contra){
+            empresa.claveDinamica = (Math.floor(Math.random()*9000)+1000).toString()
+          }
+
           res.status(200).send({
             empleado:emple,
             empresa:empresa
