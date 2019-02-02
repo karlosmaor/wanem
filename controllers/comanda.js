@@ -111,53 +111,55 @@ function saveComanda(req,res){
   }else {
     end.setHours(end.getHours()+24)
   }
-
-  /*Comanda.find({addressEnd:comandaJson.addressEnd, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart, state: {'$lte': 3}, date: {'$gte': start,'$lte': end}}).exec((err, comandasOcupadas)=>{
-    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
-    if(comandasOcupadas.length != 0)return res.status(501).send({message:'La mesa se encuantra ocupada'})
-
-  })*/
-
   let comanda = new Comanda(comandaJson)
 
-  Comanda.countDocuments({state:{'$lte': 6}, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart}, (err,c) => {
-    if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
+  Comanda.find({addressEnd:comandaJson.addressEnd, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart, state: {'$lte': 3}, date: {'$gte': start,'$lte': end}}).exec((err, com)=>{
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(com.length != 0)return res.status(501).send({message:'La mesa se encuantra ocupada'})
+    
+    Comanda.countDocuments({state:{'$lte': 6}, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart}, (err,c) => {
+      if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
-    comanda.cod = c
+      comanda.cod = c
 
-    comanda.save((err, comandaStored)=>{
-      if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
-      if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+      comanda.save((err, comandaStored)=>{
+        if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
+        if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
 
-      if(comanda.phone.length > 3){
+        if(comanda.phone.length > 3){
 
-        User.findOne({email: comanda.phone}, (err, client)=>{
-          if(err) return res.status(500).send(err)
+          User.findOne({email: comanda.phone}, (err, client)=>{
+            if(err) return res.status(500).send(err)
 
-          if(!client){
-            let newUser = new User({email: comanda.phone, name: comanda.nombreUser, phone: comanda.phone, address: comanda.addressEnd, city: comanda.city, signupDate: new Date(), lastLogin: new Date()})
+            if(!client){
+              let newUser = new User({email: comanda.phone, name: comanda.nombreUser, phone: comanda.phone, address: comanda.addressEnd, city: comanda.city, signupDate: new Date(), lastLogin: new Date()})
 
-            newUser.save((err,userStored)=>{
-              if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+              newUser.save((err,userStored)=>{
+                if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
 
-              res.status(200).send(comandaStored)
-            })
-          }else {
-            client.lastLogin = new Date()
-            client.address = comanda.addressEnd
-            client.name = comanda.nombreUser
-            client.save((err,userStored)=>{
-              if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+                res.status(200).send(comandaStored)
+              })
+            }else {
+              client.lastLogin = new Date()
+              client.address = comanda.addressEnd
+              client.name = comanda.nombreUser
+              client.save((err,userStored)=>{
+                if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
 
-              res.status(200).send(comandaStored)
-            })
-          }
-        })
-      }else{
-        res.status(200).send(comandaStored)
-      }
+                res.status(200).send(comandaStored)
+              })
+            }
+          })
+        }else{
+          res.status(200).send(comandaStored)
+        }
+      })
     })
   })
+
+
+
+
 }
 /* states:
 0 = Pedido nuevo
