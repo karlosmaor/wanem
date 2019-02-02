@@ -217,7 +217,7 @@ function CargarBase(req,res) {
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandas.length == 0)return res.status(501).send({message:'No hay comandas'})
 
-    res.status(200).send(comandas[0].dineroBase)  
+    res.status(200).send(comandas[0])  
   })
 }
 
