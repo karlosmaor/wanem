@@ -100,19 +100,19 @@ function signIn(req,res){
               if(err)return res.status(500).send(err)
             })
           }
-          var base = 0;
-          Comanda.find({state:10, empresa: empresa._id}).limit(1).sort('-date').exec((err, comandas)=>{
+          var dinero = 0;
+          Comanda.find({state:{'$gte': 4}, empresa: empresa._id}).limit(1).sort('-date').exec((err, comandas)=>{
 
             if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
             if(comandas.length != 0){
-              dinero = comandas[0].total
+              dinero = comandas[0].dineroBase
             }
           })
 
           res.status(200).send({
             empleado:emple,
             empresa:empresa,
-            base:base
+            dinero:dinero
           })
         })
       }else{
