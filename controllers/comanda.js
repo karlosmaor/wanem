@@ -40,8 +40,8 @@ function getComandasDia(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-  start.setHours(start.getHours()-24)
-  end.setHours(end.getHours()-24)
+//  start.setHours(start.getHours()-24)
+//  end.setHours(end.getHours()-24)
   Comanda.find({
     empresa: req.params.empresaId,
     state: {'$lte': 3},
@@ -75,8 +75,8 @@ function getComandasActuales(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-  start.setHours(start.getHours()-24)
-  end.setHours(end.getHours()-24)
+//  start.setHours(start.getHours()-24)
+//  end.setHours(end.getHours()-24)
   Comanda.find({
     empresa: req.params.empresaId,
     state: {'$lte': 3},
