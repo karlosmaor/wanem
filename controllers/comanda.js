@@ -64,7 +64,7 @@ function saveComanda(req,res){
 
   let comanda = new Comanda(comandaJson)
 
-  Comanda.count({state:{'$lte': 6}}, (err,c) => {
+  Comanda.countDocuments({state:{'$lte': 6}}, (err,c) => {
     if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
     comanda.cod = c
