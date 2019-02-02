@@ -112,7 +112,7 @@ function saveComanda(req,res){
     end.setHours(end.getHours()+24)
   }
 
-  Comanda.find({category:"Mesa", addressEnd:comandaJson.addressEnd, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart, state: {'$lte': 3}, date: {'$gte': start,'$lte': end}}).exec((err, comandasOcupadas)=>{
+  Comanda.find({addressEnd:comandaJson.addressEnd, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart, state: {'$lte': 3}, date: {'$gte': start,'$lte': end}}).exec((err, comandasOcupadas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandasOcupadas.length != 0)return res.status(501).send({message:'La mesa se encuantra ocupada'})
 
