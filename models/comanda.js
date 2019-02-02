@@ -26,6 +26,7 @@ const ComandaSchema = new Schema({
     precio: Number,
     cantidad: Number,
     entregado: {type: Boolean, default: false},
+    parallevar: {type: Boolean, default: false},
     caracteristicas: [{
       nombre: String,
       multiSeleccion: Boolean,
