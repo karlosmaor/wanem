@@ -8,7 +8,7 @@ const EmpresaSchema = new Schema({
   email: {type: String, unique: true, required: true, lowercase: true},
   password: {type:String, select:false, required: true},
   claveDinamica: String,
-  claveCajero: {type:String, select:false},
+  claveCajero: String,
   name: String,
   avatar: String,
   address: [String],
