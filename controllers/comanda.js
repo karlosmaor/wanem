@@ -73,7 +73,7 @@ function saveComanda(req,res){
       if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
       if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
 
-      if(comanda.phone != undefined){
+      if(comanda.phone.length > 3){
 
         User.findOne({email: comanda.phone}, (err, client)=>{
           if(err) return res.status(500).send(err)
