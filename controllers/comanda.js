@@ -101,9 +101,26 @@ function saveComanda(req,res){
   if(comandaJson.mesero.length < 2) delete comandaJson.mesero
   if(comandaJson.empresa.length < 2) delete comandaJson.empresa
 
+  var fecha = new Date()
+  var start = new Date()
+  var end = new Date()
+  start.setHours(5,0,0,0)
+  end.setHours(5,0,0,0)
+  if(fecha<start){
+    start.setHours(start.getHours()-24)
+  }else {
+    end.setHours(end.getHours()+24)
+  }
+
+  Comanda.find({category:"Mesa", addressEnd:comandaJson.addressEnd, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart, state: {'$lte': 3}, date: {'$gte': start,'$lte': end}}).exec((err, comandasOcupadas)=>{
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(comandasOcupadas.length != 0)return res.status(501).send({message:'La mesa se encuantra ocupada'})
+
+  })
+
   let comanda = new Comanda(comandaJson)
 
-  Comanda.countDocuments({state:{'$lte': 6}}, (err,c) => {
+  Comanda.countDocuments({state:{'$lte': 6}, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart}, (err,c) => {
     if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
     comanda.cod = c
