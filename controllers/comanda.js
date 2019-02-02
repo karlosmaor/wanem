@@ -40,8 +40,8 @@ function getComandasDia(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-  start.setHours(start.getHours()-24)
-  end.setHours(end.getHours()-24)
+//  start.setHours(start.getHours()-24)
+//  end.setHours(end.getHours()-24)
   Comanda.find({
     empresa: req.body.empresaId,
     addressStart: req.body.addressStart,
@@ -116,7 +116,7 @@ function saveComanda(req,res){
   Comanda.find({addressEnd:comandaJson.addressEnd, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart, state: {'$lte': 3}, date: {'$gte': start,'$lte': end}}).exec((err, com)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(com.length != 0)return res.status(501).send({message:'La mesa se encuantra ocupada'})
-    
+
     Comanda.countDocuments({state:{'$lte': 6}, empresa: comandaJson.empresa, addressStart: comandaJson.addressStart}, (err,c) => {
       if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
