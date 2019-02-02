@@ -105,7 +105,7 @@ function signIn(req,res){
 
             if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
             if(comandas.length != 0){
-              base = comandas[0].total
+              dinero = comandas[0].total
             }
           })
 
