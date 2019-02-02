@@ -40,8 +40,8 @@ function getComandasDia(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-  //start.setHours(start.getHours()-24)
-//  end.setHours(end.getHours()-24)
+  start.setHours(start.getHours()-24)
+  end.setHours(end.getHours()-24)
   Comanda.find({
     empresa: req.params.empresaId,
     state: {'$lte': 3},
@@ -53,7 +53,10 @@ function getComandasDia(req, res){
 
     const comandasNuevas = comandas.filter(x => x.state == 0)
     if(comandasNuevas.length>0){
-        res.status(200).send(comandas)
+      Comanda.update({state:0,empresa:req.params.empresaId}, {state:1}, {multi:true}, (err,doc){
+        if(err)return res.status(500).send({message:`Error al realizar la actualización ${err}`})
+          res.status(200).send(comandas)
+      })
     }else{
         res.status(201).send('ok')
     }
