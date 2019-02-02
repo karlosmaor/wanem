@@ -43,7 +43,8 @@ function getComandasDia(req, res){
 //  start.setHours(start.getHours()-24)
 //  end.setHours(end.getHours()-24)
   Comanda.find({
-    empresa: req.params.empresaId,
+    empresa: req.body.empresaId,
+    addressStart: req.body.addressStart,
     state: {'$lte': 3},
     date: {'$gte': start,'$lte': end}
   }).sort('-date').exec((err, comandas)=>{
@@ -78,7 +79,8 @@ function getComandasActuales(req, res){
 //  start.setHours(start.getHours()-24)
 //  end.setHours(end.getHours()-24)
   Comanda.find({
-    empresa: req.params.empresaId,
+    empresa: req.body.empresaId,
+    addressStart: req.body.addressStart,
     state: {'$lte': 3},
     date: {'$gte': start,'$lte': end}
   }).sort('-date').exec((err, comandas)=>{

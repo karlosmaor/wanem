@@ -47,9 +47,9 @@ api.delete('/pedido/:pedidoId', PedidoCtrl.deletePedido)
 //---------------Rutas para comandas----------//
 
 api.get('/comandas', ComandaCtrl.getComandas)
-api.get('/comandas/dia/:empresaId', ComandaCtrl.getComandasDia)
-api.get('/comandas/actuales/:empresaId', ComandaCtrl.getComandasActuales)
 api.get('/comanda/:comandaId', ComandaCtrl.getComanda)
+api.post('/comandas/dia', ComandaCtrl.getComandasDia)
+api.post('/comandas/actuales', ComandaCtrl.getComandasActuales)
 api.post('/comanda', ComandaCtrl.saveComanda)
 api.post('/comanda/buscar/fecha', ComandaCtrl.search)
 api.post('/comanda/search/state', ComandaCtrl.searchState)
