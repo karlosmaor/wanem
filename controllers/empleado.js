@@ -78,17 +78,17 @@ function saveEmpleado(req,res){
 function signIn(req,res){
   let usuario = req.body.email
   let contra = req.body.contra
-  
+
   Empleado.findOne({email: usuario}, (err,emple) => {
     if(err) return res.status(500).send({message: err})
-    if(!emple) return res.status(500).send('El empleado no está registrado')
+    if(!emple) return res.status(501).send('El empleado no está registrado')
 
     Empresa.findById(emple.empresa, (err, empresa) => {
 
       if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
       if(!empresa) return res.status(404).send({message:'El Empresa no existe'})
 
-      if(empresa.claveDinamica == contra){
+      if(empresa.claveDinamica == contra || empresa.claveCajero == contra){
         emple.ingresoDate.push(new Date())
         emple.save((err)=>{
           if(err)return res.status(500).send(err)

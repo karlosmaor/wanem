@@ -67,8 +67,6 @@ api.post('/empresa/:empresaId', EmpresaCtrl.updateEmpresa)
 api.put('/empresa/:empresaId', EmpresaCtrl.updateEmpresa)
 api.delete('/empresa/:empresaId', EmpresaCtrl.deleteEmpresa)
 
-
-
 //---------------Rutas para eventos----------//
 
 api.get('/eventos', EventoCtrl.getEventos)
