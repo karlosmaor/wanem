@@ -40,8 +40,8 @@ function getComandasDia(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-//  start.setHours(start.getHours()-24)
-//  end.setHours(end.getHours()-24)
+  start.setHours(start.getHours()-24)
+  end.setHours(end.getHours()-24)
   Comanda.find({
     empresa: req.body.empresaId,
     addressStart: req.body.addressStart,
@@ -217,7 +217,7 @@ function CargarBase(req,res) {
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandas.length == 0)return res.status(501).send({message:'No hay comandas'})
 
-    res.status(200).send(comandas[0])  
+    res.status(200).send(comandas[0])
   })
 }
 
