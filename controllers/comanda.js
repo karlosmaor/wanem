@@ -76,8 +76,8 @@ function getComandasActuales(req, res){
   }else {
     end.setHours(end.getHours()+24)
   }
-  start.setHours(start.getHours()-24)
- end.setHours(end.getHours()-24)
+//  start.setHours(start.getHours()-24)
+// end.setHours(end.getHours()-24)
   Comanda.find({
     empresa: req.body.empresaId,
     addressStart: req.body.addressStart,
@@ -212,6 +212,18 @@ function searchState(req, res){
   })
 }
 
+function CargarBase(req,res) {
+  Comanda.find({state:{'$gte': 4}, empresa: req.body.empresaId, addressStart: req.body.addressStart}).limit(1).sort('-date').exec((err, comandas)=>{
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+
+    var dinero = 0
+    if(comandas.length != 0){
+      dinero = comandas[0].dineroBase
+      res.status(200).send(dinero)
+    }
+  })
+}
+
 module.exports ={
   getComanda,
   getComandas,
@@ -221,5 +233,6 @@ module.exports ={
   updateComanda,
   deleteComanda,
   search,
-  searchState
+  searchState,
+  CargarBase
 }

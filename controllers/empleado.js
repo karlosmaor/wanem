@@ -3,7 +3,6 @@
 const mongoose = require('mongoose')
 const Empleado = require('../models/empleado')
 const Empresa = require('../models/empresa')
-const Comanda = require('../models/comanda')
 const service = require('../services')
 
 function getEmpleado(req,res){
@@ -100,19 +99,10 @@ function signIn(req,res){
               if(err)return res.status(500).send(err)
             })
           }
-          var dinero = 0;
-          Comanda.find({state:{'$gte': 4}, empresa: empresa._id}).limit(1).sort('-date').exec((err, comandas)=>{
-
-            if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
-            if(comandas.length != 0){
-              dinero = comandas[0].dineroBase
-            }
-          })
 
           res.status(200).send({
             empleado:emple,
-            empresa:empresa,
-            dinero:dinero
+            empresa:empresa
           })
         })
       }else{
