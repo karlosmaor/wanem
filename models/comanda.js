@@ -16,6 +16,7 @@ const ComandaSchema = new Schema({
   horaPago: Date,
   category: String,
   state: {type:Number, default: 0},
+  dineroBase: Number,
   modoPago: String,
   Valor_Efectivo: {type: Number, default: 0},
   Valor_Tarjeta: {type: Number, default: 0},
