@@ -96,6 +96,9 @@ function saveComanda(req,res){
 
   let comandaJson = JSON.parse(req.body.comandaJson)
   comandaJson.date = new Date()
+  if (comandaJson.state > 3){
+    comandaJson.horaPago = new Date()
+  }
   delete comandaJson._id
 
   if(comandaJson.mesero.length < 2) delete comandaJson.mesero
