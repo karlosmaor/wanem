@@ -232,7 +232,7 @@ function searchState(req, res){
 }
 
 function CargarBase(req,res) {
-  Comanda.find({state:{'$gte': 4}, empresa: req.body.empresaId, addressStart: req.body.addressStart}).limit(1).sort('-date').exec((err, comandas)=>{
+  Comanda.find({state:{'$gte': 4}, empresa: req.body.empresaId, addressStart: req.body.addressStart}).limit(1).sort('-horaPago').exec((err, comandas)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandas.length == 0)return res.status(501).send({message:'No hay comandas'})
 
