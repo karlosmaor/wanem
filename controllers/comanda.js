@@ -198,7 +198,7 @@ function updateComanda(req,res){
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
     if(comandaUpdated == undefined) return res.status(404).send('No se encontró el comanda')
 
-    res.status(200).send(comandaUpdated)
+    res.status(200).send(comandaJson)
   })
 }
 
