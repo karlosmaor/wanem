@@ -53,12 +53,19 @@ function getComandasDia(req, res){
     if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
 
     const comandasNuevas = comandas.filter(x => x.state == 0)
+    const comandasEntregadas = comandas.filter(x => x.state == 2)
+
     if(comandasNuevas.length>0){
-      Comanda.updateMany({state:0,empresa:req.params.empresaId}, {state:0}, {multi:true}, (err,doc) =>{
+      Comanda.updateMany({state:0,empresa:req.params.empresaId}, {state:1}, {multi:true}, (err,doc) =>{
         if(err)return res.status(500).send({message:`Error al realizar la actualización ${err}`})
           res.status(200).send(comandas)
       })
-    }else{
+    }elseif(comandasEntregadas.length>0){
+      Comanda.updateMany({state:2,empresa:req.params.empresaId}, {state:3}, {multi:true}, (err,doc) =>{
+        if(err)return res.status(500).send({message:`Error al realizar la actualización ${err}`})
+          res.status(200).send(comandas)
+      })
+    }else {
         res.status(201).send('ok')
     }
   })
