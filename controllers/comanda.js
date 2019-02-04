@@ -243,6 +243,44 @@ function CargarBase(req,res) {
   })
 }
 
+function CierreCaja(req, res){
+
+  var fecha = new Date()
+  var start = new Date()
+  var end = new Date()
+  start.setHours(5,0,0,0)
+  end.setHours(5,0,0,0)
+  if(fecha<start){
+    start.setHours(start.getHours()-24)
+  }else {
+    end.setHours(end.getHours()+24)
+  }
+//  start.setHours(start.getHours()-24)
+// end.setHours(end.getHours()-24)
+  Comanda.find({
+    empresa: req.body.empresaId,
+    addressStart: req.body.addressStart,
+    state: {'$gte': 4},
+    date: {'$gte': start,'$lte': end}
+  }).sort('-date').exec((err, comandas)=>{
+
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
+
+    var gastos = 0
+    var ventas = 0
+    comandas.forEach(function(coma){
+      if(coma.state == 4){
+        ventas = ventas + coma.total
+      }else if (coma.state == 11) {
+        gastos = gastos + coma.total
+      }
+    })
+
+    res.status(200).send(ventas.toString().concat(",", gastos.toString()))
+  })
+}
+
 module.exports ={
   getComanda,
   getComandas,
@@ -253,5 +291,6 @@ module.exports ={
   deleteComanda,
   search,
   searchState,
-  CargarBase
+  CargarBase,
+  CierreCaja
 }
