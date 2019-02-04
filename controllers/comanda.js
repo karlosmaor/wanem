@@ -56,12 +56,12 @@ function getComandasDia(req, res){
     const comandasEntregadas = comandas.filter(x => x.state == 2)
 
     if(comandasNuevas.length>0){
-      Comanda.updateMany({state:0,empresa:req.params.empresaId}, {state:1}, {multi:true}, (err,doc) =>{
+      Comanda.updateMany({state:0,empresa:req.body.empresaId,addressStart: req.body.addressStart}, {state:1}, {multi:true}, (err,doc) =>{
         if(err)return res.status(500).send({message:`Error al realizar la actualización ${err}`})
           res.status(200).send(comandas)
       })
     }else if(comandasEntregadas.length>0){
-      Comanda.updateMany({state:2,empresa:req.params.empresaId}, {state:3}, {multi:true}, (err,doc) =>{
+      Comanda.updateMany({state:2,empresa:req.body.empresaId,,addressStart: req.body.addressStart}, {state:3}, {multi:true}, (err,doc) =>{
         if(err)return res.status(500).send({message:`Error al realizar la actualización ${err}`})
           res.status(200).send(comandas)
       })
