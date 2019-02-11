@@ -6,6 +6,7 @@ const Schema = mongoose.Schema
 const ComandaSchema = new Schema({
   mesero: {type: Schema.Types.ObjectId, ref: 'Empleado'},
   empresa: {type: Schema.Types.ObjectId, ref: 'Empresa'},
+  cajero: {type: Schema.Types.ObjectId, ref: 'Empleado'},
   cod: Number,
   addressEnd: String,
   addressStart: String,
