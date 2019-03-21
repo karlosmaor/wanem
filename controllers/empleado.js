@@ -27,8 +27,8 @@ function getEmpleados(req, res){
 }
 
 function updateEmpleado(req,res){
+  let update = JSON.parse(req.body.empleadoJson)
   let empleadoId = req.params.empleadoId
-  let update = req.body
 
   Empleado.findByIdAndUpdate(empleadoId, update, (err, empleadoUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar el Empleado en la base de datos ${err}`})
