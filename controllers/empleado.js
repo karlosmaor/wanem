@@ -52,7 +52,7 @@ function deleteEmpleado(req,res){
 function saveEmpleado(req,res){
 
   let empleadoJson = JSON.parse(req.body.empleadoJson)
-
+  delete empleadoJson._id
   let empleado = new Empleado(empleadoJson)
 
   Empleado.findOne({email: empleado.email},(err,clien) =>{
