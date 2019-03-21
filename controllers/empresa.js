@@ -27,7 +27,7 @@ function getEmpresas(req, res){
 
 function updateEmpresa(req,res){
   let empresaJson = JSON.parse(req.body.empresaJson)
-  delete empresaJson.eventos  
+  delete empresaJson.eventos
   if(empresaJson.password.length == 0){
     delete empresaJson.password
   }
@@ -91,7 +91,7 @@ function signIn(req,res){
       if(isMatch){
         var update = {lastLogin:new Date()}
         Empresa.findByIdAndUpdate(empresa._id, update, (err, empresaUpdated) =>{
-          if(err) return res.status(205).send({message:`Error al editar el Empresa en la base de datos ${err}`})
+          if(err) return res.status(500).send({message:`Error al editar el Empresa en la base de datos ${err}`})
 
           res.status(200).send(empresa)
         })

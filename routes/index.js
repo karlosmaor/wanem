@@ -24,7 +24,7 @@ api.delete('/user/:userId', UserCtrl.deleteUser)
 
 //----------------Rutas Empleados-------------//
 
-api.get('/empleados', EmpleadoCtrl.getEmpleados)
+api.get('/empleados/empresa/:empresaId', EmpleadoCtrl.getEmpleados)
 api.get('/empleado/:empleadoId', EmpleadoCtrl.getEmpleado)
 api.post('/empleado', EmpleadoCtrl.saveEmpleado)
 api.post('/empleado/signin', EmpleadoCtrl.signIn)

@@ -18,7 +18,7 @@ function getEmpleado(req,res){
 }
 
 function getEmpleados(req, res){
-  Empleado.find({}, (err, empleados)=>{
+  Empleado.find({empresa:req.params.empresaId}, (err, empleados)=>{
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(empleados.length == 0)return res.status(501).send({message:'No hay Empleados registrados'})
 
