@@ -27,7 +27,7 @@ function getEmpleados(req, res){
 }
 
 function updateEmpleado(req,res){
-  let update = JSON.parse(req.body.empleadoJson)
+  let update = JSON.parse(req.body.empleadoJson) 
   let empleadoId = req.params.empleadoId
 
   Empleado.findByIdAndUpdate(empleadoId, update, (err, empleadoUpdated) =>{
