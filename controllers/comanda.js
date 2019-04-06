@@ -214,22 +214,31 @@ function deleteComanda(req,res){
   })
 }
 
-function search(req,res){
-  let date1 = req.body.date1
-  let date2 = req.body.date2
+function searchFecha(req, res){
 
+  var fecha = new Date()
+  var start = new Date()
+  var end = new Date()
+  start.setHours(5,0,0,0)
+  end.setHours(5,0,0,0)
+  if(fecha<start){
+    start.setHours(start.getHours()-24)
+  }else {
+    end.setHours(end.getHours()+24)
+  }
+//  start.setHours(start.getHours()-24)
+//  end.setHours(end.getHours()-24)
   Comanda.find({
-    date: {
-      '$gte': new Date(date1),
-      '$lte': new Date(date2)
-    }
-  },(err, comandas) => {
-    if(err)return res.status(500).send({message:`Error: ${err}`})
+    empresa: req.body.empresaId,
+    state: {'$lte': 3},
+    date: {'$gte': start,'$lte': end}
+  }).sort('-date').exec((err, comandas)=>{
 
-    if(comandas.length == 0) return res.status(501).send({message:'No hay entregas'})
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
 
     res.status(200).send(comandas)
-  })
+  }
 }
 
 function searchState(req, res){
@@ -296,7 +305,7 @@ module.exports ={
   saveComanda,
   updateComanda,
   deleteComanda,
-  search,
+  searchFecha,
   searchState,
   CargarBase,
   CierreCaja
