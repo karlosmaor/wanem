@@ -238,7 +238,7 @@ function searchFecha(req, res){
     if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
 
     res.status(200).send(comandas)
-  }
+  })
 }
 
 function searchState(req, res){
