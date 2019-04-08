@@ -216,6 +216,9 @@ function deleteComanda(req,res){
 
 function searchFecha(req, res){
 
+  console.log(new Date(req.body.fechaInicio));
+  console.log(new Date(req.body.fechaFinal));
+
   var fecha = new Date()
   var start = new Date()
   var end = new Date()
