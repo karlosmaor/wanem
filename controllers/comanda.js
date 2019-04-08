@@ -227,7 +227,6 @@ function searchFecha(req, res){
     end.setHours(end.getHours()+24)
   }*/
 //  start.setHours(start.getHours()-24)
-  end.setHours(end.getHours()+24)
 
   console.log(start);
   console.log(end);
