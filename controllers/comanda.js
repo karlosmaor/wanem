@@ -216,21 +216,22 @@ function deleteComanda(req,res){
 
 function searchFecha(req, res){
 
-  console.log(new Date(req.body.fechaInicio));
-  console.log(new Date(req.body.fechaFinal));
-
-  var fecha = new Date()
-  var start = new Date()
-  var end = new Date()
+//  var fecha = new Date()
+  var start = new Date(req.body.fechaInicio)
+  var end = new Date(req.body.fechaInicio)
   start.setHours(5,0,0,0)
   end.setHours(5,0,0,0)
-  if(fecha<start){
+/*  if(fecha<start){
     start.setHours(start.getHours()-24)
   }else {
     end.setHours(end.getHours()+24)
-  }
+  }*/
 //  start.setHours(start.getHours()-24)
-//  end.setHours(end.getHours()-24)
+  end.setHours(end.getHours()+24)
+
+  console.log(start);
+  console.log(end);
+
   Comanda.find({
     empresa: req.body.empresaId,
     state: {'$lte': 3},
