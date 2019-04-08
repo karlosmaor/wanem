@@ -218,7 +218,7 @@ function searchFecha(req, res){
 
 //  var fecha = new Date()
   var start = new Date(req.body.fechaInicio)
-  var end = new Date(req.body.fechaInicio)
+  var end = new Date(req.body.fechaFinal)
   start.setHours(5,0,0,0)
   end.setHours(5,0,0,0)
 /*  if(fecha<start){
