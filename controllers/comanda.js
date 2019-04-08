@@ -221,15 +221,9 @@ function searchFecha(req, res){
   var end = new Date(req.body.fechaFinal)
   start.setHours(5,0,0,0)
   end.setHours(5,0,0,0)
-/*  if(fecha<start){
-    start.setHours(start.getHours()-24)
-  }else {
-    end.setHours(end.getHours()+24)
-  }*/
-//  start.setHours(start.getHours()-24)
 
-  console.log(start);
-  console.log(end);
+  //console.log(start);
+  //console.log(end);
 
   Comanda.find({
     empresa: req.body.empresaId,
