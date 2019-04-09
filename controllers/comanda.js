@@ -229,7 +229,7 @@ function searchFecha(req, res){
     empresa: req.body.empresaId,
     state: {'$lte': 3},
     date: {'$gte': start,'$lte': end}
-  }).sort('-date').exec((err, comandas)=>{
+  }).sort('-date').populate('mesero').populate('cajero').exec((err, comandas)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
