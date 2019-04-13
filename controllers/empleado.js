@@ -27,7 +27,7 @@ function getEmpleados(req, res){
 }
 
 function updateEmpleado(req,res){
-  let update = JSON.parse(req.body.empleadoJson) 
+  let update = JSON.parse(req.body.empleadoJson)
   let empleadoId = req.params.empleadoId
 
   Empleado.findByIdAndUpdate(empleadoId, update, (err, empleadoUpdated) =>{
@@ -88,7 +88,7 @@ function signIn(req,res){
       if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
       if(!empresa) return res.status(404).send({message:'El Empresa no existe'})
 
-      if(empresa.claveDinamica == contra || empresa.claveCajero == contra){
+      if(empresa.claveDinamica == contra || emple.password == contra){
         emple.ingresoDate.push(new Date())
         emple.save((err)=>{
           if(err)return res.status(500).send(err)
