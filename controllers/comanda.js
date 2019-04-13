@@ -187,7 +187,7 @@ function updateComanda(req,res){
 
   let comandaJson = JSON.parse(req.body.comandaJson)
   let comandaId = req.params.comandaId
-
+  delete comandaJson.mesero
   if(comandaJson.state == 2){
     comandaJson.horaEntrega = new Date()
   }else if(comandaJson.state == 4){
