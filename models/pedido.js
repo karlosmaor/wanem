@@ -24,6 +24,7 @@ const PedidoSchema = new Schema({
     iden: String,
     precio: Number,
     cantidad: Number,
+    entregado: Boolean,
     caracteristicas: [{
       nombre: String,
       multiSeleccion: Boolean,
