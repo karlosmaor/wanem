@@ -58,7 +58,16 @@ function getComandasDia(req, res){
     if(comandasNuevas.length>0){
       Comanda.updateMany({state:0,empresa:req.body.empresaId,addressStart: req.body.addressStart}, {state:1}, {multi:true}, (err,doc) =>{
         if(err)return res.status(500).send({message:`Error al realizar la actualización ${err}`})
+
           res.status(200).send(comandas)
+
+          comandasNuevas.forEach(function(comandaNew){
+            comandaNew.productos.forEach(function(produ){
+              produ.entregado = true
+            })
+            comandaNew.save((err,comandStored)=>{
+              if(err) console.log(`Error registrando nuevo Empleado: ${err}`)
+          })
       })
     }else if(comandasEntregadas.length>0){
       Comanda.updateMany({state:2,empresa:req.body.empresaId,addressStart: req.body.addressStart}, {state:3}, {multi:true}, (err,doc) =>{
