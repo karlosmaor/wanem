@@ -19,6 +19,7 @@ app.use('/elnavio', expressStatic('./public/elnavio'))
 app.use('/maloka', expressStatic('./public/maloka'))
 app.use('/bocagrande', expressStatic('./public/bocagrande'))
 app.use('/qbanitos', expressStatic('./public/qbanitos'))
+app.use('/laruta', expressStatic('./public/laruta'))
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
