@@ -66,7 +66,8 @@ function getComandasDia(req, res){
               produ.entregado = true
             })
             comandaNew.save((err,comandStored)=>{
-              if(err) console.log(`Error registrando nuevo Empleado: ${err}`)
+              if(err) console.log(`Error registrando cambios en comanda: ${err}`)
+            })
           })
       })
     }else if(comandasEntregadas.length>0){
