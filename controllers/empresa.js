@@ -26,7 +26,6 @@ function getEmpresas(req, res){
 }
 
 function updateEmpresa(req,res){
-  console.log(req.body.empresaJson);
   let empresaJson = JSON.parse(req.body.empresaJson)
   delete empresaJson.eventos
   if(empresaJson.password.length == 0){
