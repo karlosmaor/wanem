@@ -118,7 +118,7 @@ function saveComanda(req,res){
   }
   delete comandaJson._id
   if (comandaJson.state == 11 || comandaJson.state == 12){
-    delete comanda.mesero
+    comanda.mesero = " "
   }
 
   if(comandaJson.mesero.length < 2) delete comandaJson.mesero
