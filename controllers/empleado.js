@@ -112,6 +112,23 @@ function signIn(req,res){
   })
 }
 
+function nuevaClaveDinamica(req,res){
+  Empresa.findById(req.params.empresaId, (err, empresa) => {
+    if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(!empresa) return res.status(404).send({message:'El Empresa no existe'})
+
+    empresa.claveDinamica = (Math.floor(Math.random()*9000)+1000).toString()
+    empresa.save((err)=>{
+      if(err)return res.status(500).send(err)
+
+      res.status(200).send(empresa.claveDinamica)
+    })
+
+  })
+
+
+}
+
 module.exports = {
   getEmpleado,
   getEmpleados,
