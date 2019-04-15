@@ -117,6 +117,9 @@ function saveComanda(req,res){
     comandaJson.horaPago = new Date()
   }
   delete comandaJson._id
+  if (comandaJson.state == 11 || comandaJson.state == 12){
+    delete comanda.mesero
+  }
 
   if(comandaJson.mesero.length < 2) delete comandaJson.mesero
   if(comandaJson.empresa.length < 2) delete comandaJson.empresa
