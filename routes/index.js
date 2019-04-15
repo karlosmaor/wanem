@@ -26,6 +26,7 @@ api.delete('/user/:userId', UserCtrl.deleteUser)
 
 api.get('/empleados/empresa/:empresaId', EmpleadoCtrl.getEmpleados)
 api.get('/empleado/:empleadoId', EmpleadoCtrl.getEmpleado)
+api.get('/clave/dinamica/:empresaId', EmpleadoCtrl.nuevaClaveDinamica)
 api.post('/empleado', EmpleadoCtrl.saveEmpleado)
 api.post('/empleado/signin', EmpleadoCtrl.signIn)
 api.post('/empleado/:empleadoId', EmpleadoCtrl.updateEmpleado)

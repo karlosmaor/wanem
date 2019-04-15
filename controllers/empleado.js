@@ -135,5 +135,6 @@ module.exports = {
   deleteEmpleado,
   updateEmpleado,
   saveEmpleado,
-  signIn
+  signIn,
+  nuevaClaveDinamica
 }
