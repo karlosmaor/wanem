@@ -88,17 +88,16 @@ function signIn(req,res){
       if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
       if(!empresa) return res.status(404).send({message:'El Empresa no existe'})
 
-      if(empresa.claveDinamica == contra || emple.password == contra){
+      if(empresa.claveDinamica == contra || (emple.password == contra && emple.password.length > 0)){
         emple.ingresoDate.push(new Date())
         emple.save((err)=>{
           if(err)return res.status(500).send(err)
+          
+          empresa.claveDinamica = (Math.floor(Math.random()*9000)+1000).toString()
+          empresa.save((err)=>{
+            if(err)return res.status(500).send(err)
+          })
 
-          if(emple.tipo == "Cajero" &&  emple.password == contra){
-            empresa.claveDinamica = (Math.floor(Math.random()*9000)+1000).toString()
-            empresa.save((err)=>{
-              if(err)return res.status(500).send(err)
-            })
-          }
 
           res.status(200).send({
             empleado:emple,
