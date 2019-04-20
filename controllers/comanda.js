@@ -111,6 +111,8 @@ function getComandasActuales(req, res){
 
 function saveComanda(req,res){
 
+  console.log(req.body.comandaJson);
+
   let comandaJson = JSON.parse(req.body.comandaJson)
   comandaJson.date = new Date()
   if (comandaJson.state > 3){
@@ -151,7 +153,7 @@ function saveComanda(req,res){
 
         if(comanda.phone.length > 3){
 
-          User.findOne({email: comanda.phone}, (err, client)=>{
+          User.findOne({phone: comanda.phone}, (err, client)=>{
             if(err) return res.status(500).send(err)
 
             if(!client){
