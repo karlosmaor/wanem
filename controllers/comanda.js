@@ -177,7 +177,7 @@ function saveComanda(req,res){
               })
             }
             //Crear pedido para Wanem
-            if(comanda.category == 'Domicilio'){
+            /*if(comanda.category == 'Domicilio'){
               let pedidoNuevo = new Pedido({
                 state:0,
                 Valor_Domicilio:3500,
@@ -208,7 +208,7 @@ function saveComanda(req,res){
               })
             }
             console.log('Nuevo Pedido');
-            console.log(pedidoNuevo);
+            console.log(pedidoNuevo);*/
             //
           })
         }else{
