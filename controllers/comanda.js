@@ -111,8 +111,6 @@ function getComandasActuales(req, res){
 
 function saveComanda(req,res){
 
-  console.log(req.body.comandaJson);
-
   let comandaJson = JSON.parse(req.body.comandaJson)
   comandaJson.date = new Date()
   if (comandaJson.state > 3){
@@ -146,6 +144,8 @@ function saveComanda(req,res){
       if(err) return res.status(500).send({message :`Error al contando los pedidos: ${err}`})
 
       comanda.cod = c
+
+      console.log(comanda);
 
       comanda.save((err, comandaStored)=>{
         if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
