@@ -3,6 +3,7 @@
 require('isomorphic-fetch')
 const mongoose = require('mongoose')
 const Comanda =  require('../models/comanda')
+const Pedido =  require('../models/pedido')
 const User =  require('../models/user')
 const config = require('../config')
 
@@ -161,6 +162,7 @@ function saveComanda(req,res){
 
               newUser.save((err,userStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
+                client = userStored
 
                 res.status(200).send(comandaStored)
               })
@@ -174,6 +176,40 @@ function saveComanda(req,res){
                 res.status(200).send(comandaStored)
               })
             }
+            //Crear pedido para Wanem
+            if(comanda.category == 'Domicilio'){
+              let pedidoNuevo = new Pedido({
+                state:0,
+                Valor_Domicilio:3500,
+                Valor_Productos:comanda.total,
+                addressEnd:comanda.addressEnd,
+                category:'Moto',
+                city:comanda.city,
+                comentario:comanda.comentario,
+                modoPago:'efectivo',
+                nombreUser:comanda.nombreUser,
+                phone:comanda.phone,
+                total:comanda.total+3500,
+                date:new Date(),
+                user:client._id
+              })
+              pedidoNuevo.productos = []
+              comanda.productos.forEach(function(produ){
+                var newProducto = {
+                  cantidad:produ.cantidad,
+                  caracteristicas:produ.caracteristicas,
+                  descripcion:produ.descripcion,
+                  imagen:produ.imagen,
+                  nombre:produ.nombre,
+                  precio:produ.precio,
+                  empresa:comanda.empresa
+                }
+                pedidoNuevo.productos.push(newProducto)
+              })
+            }
+            console.log('Nuevo Pedido');
+            console.log(pedidoNuevo);
+            //
           })
         }else{
           res.status(200).send(comandaStored)
