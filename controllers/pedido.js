@@ -134,8 +134,8 @@ function updatePedido(req,res){
           date:new Date()
         })
         var totalComanda = 0
-        
-        pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i]).forEach(function(product){
+        var productosEmpresa = pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i])
+        productosEmpresa.forEach(function(product){
           var newProducto = new Producto({
             entregado:false,
             parallevar:false,
