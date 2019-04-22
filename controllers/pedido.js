@@ -116,7 +116,7 @@ function updatePedido(req,res){
     res.status(200).send(pedidoUpdated)
   })
 //Creando pedidos para la caja de los restaurantes
-  if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
+/*  if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
     var listaEmpresas = []
     var listaDirecciones = []
     var listaTotales =[]
@@ -169,7 +169,7 @@ function updatePedido(req,res){
       newProducto.mesero = '5cbe474217fc4464df6907fc'
       console.log(comandaNueva);
     }
-  }
+  }*/
 //
 }
 
