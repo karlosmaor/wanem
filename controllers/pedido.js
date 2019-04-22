@@ -109,68 +109,69 @@ function updatePedido(req,res){
   let pedidoId = req.params.pedidoId
   delete pedidoJson.user
 
+  //Creando pedidos para la caja de los restaurantes
+    if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
+      var listaEmpresas = []
+      var listaDirecciones = []
+      var listaTotales =[]
+      pedidoJson.productos.forEach(function(produ){
+        if(!listaEmpresas.includes(produ.empresa)){
+          listaEmpresas.push(produ.empresa)
+          listaDirecciones.push(produ.address)
+        }
+      })
+      for(i=0; i<listaEmpresas.length; i++){
+        let comandaNueva = new Comanda({
+          state:0,
+          addressEnd:pedidoJson.addressEnd,
+          addressStart:listaDirecciones[i],
+          category:'Domicilio',
+          city:pedidoJson.city,
+          comentario:pedidoJson.comentario,
+          empresa:listaEmpresas[i],
+          nombreUser:pedidoJson.nombreUser,
+          phone:phone,
+          date:new Date()
+        })
+        var totalComanda = 0
+        pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i]).forEach(function(product){
+          var newProducto = new Producto({
+            entregado:false,
+            parallevar:false,
+            cantidad:product.cantidad,
+            caracteristicas:product.caracteristicas,
+            descripcion:product.descripcion,
+            imagen:product.imagen,
+            nombre:product.nombre,
+            precio:product.precio
+          })
+          totalComanda += product.precio
+          newProducto.caracteristicas.forEach(function(carac){
+            carac.opciones.forEach(function(opc){
+              if(opc.estado){
+                totalComanda += opc.precio
+              }
+            })
+          })
+        })
+        newProducto.total = totalComanda
+        Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i], addressStart: listaDirecciones[i]}, (err,c) => {
+          if(err) return res.status(500).send({message :`Error contando los pedidos: ${err}`})
+
+          comanda.cod = c
+        })
+        newProducto.mesero = '5cbe474217fc4464df6907fc'
+        console.log(comandaNueva);
+      }
+    }
+  //
+
   Pedido.findByIdAndUpdate(pedidoId, pedidoJson,  (err, pedidoUpdated) =>{
     if(err) return res.status(500).send({message:`Error al editar la entrega de la base de datos ${err}`})
     if(pedidoUpdated == undefined) return res.status(404).send('No se encontró el pedido')
 
     res.status(200).send(pedidoUpdated)
   })
-//Creando pedidos para la caja de los restaurantes
-/*  if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
-    var listaEmpresas = []
-    var listaDirecciones = []
-    var listaTotales =[]
-    pedidoJson.productos.forEach(function(produ){
-      if(!listaEmpresas.includes(produ.empresa)){
-        listaEmpresas.push(produ.empresa)
-        listaDirecciones.push(produ.address)
-      }
-    })
-    for(i=0; i<listaEmpresas.length; i++){
-      let comandaNueva = new Comanda({
-        state:0,
-        addressEnd:pedidoJson.addressEnd,
-        addressStart:listaDirecciones[i],
-        category:'Domicilio',
-        city:pedidoJson.city,
-        comentario:pedidoJson.comentario,
-        empresa:listaEmpresas[i],
-        nombreUser:pedidoJson.nombreUser,
-        phone:phone,
-        date:new Date()
-      })
-      var totalComanda = 0
-      pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i]).forEach(function(product){
-        var newProducto = new Producto({
-          entregado:false,
-          parallevar:false,
-          cantidad:product.cantidad,
-          caracteristicas:product.caracteristicas,
-          descripcion:product.descripcion,
-          imagen:product.imagen,
-          nombre:product.nombre,
-          precio:product.precio
-        })
-        totalComanda += product.precio
-        newProducto.caracteristicas.forEach(function(carac){
-          carac.opciones.forEach(function(opc){
-            if(opc.estado){
-              totalComanda += opc.precio
-            }
-          })
-        })
-      })
-      newProducto.total = totalComanda
-      Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i], addressStart: listaDirecciones[i]}, (err,c) => {
-        if(err) return res.status(500).send({message :`Error contando los pedidos: ${err}`})
-
-        comanda.cod = c
-      })
-      newProducto.mesero = '5cbe474217fc4464df6907fc'
-      console.log(comandaNueva);
-    }
-  }*/
-//
 }
 
 function deletePedido(req,res){
