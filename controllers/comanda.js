@@ -164,7 +164,7 @@ function saveComanda(req,res){
               newUser.save((err,userStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
                 miCliente = newUser
-
+                console.log(miCliente);
                 res.status(200).send(comandaStored)
               })
             }else {
@@ -174,11 +174,14 @@ function saveComanda(req,res){
               client.save((err,userStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
                 miCliente = client
+                console.log(miCliente);
                 res.status(200).send(comandaStored)
               })
             }
             //Crear pedido para Wanem
             if(comanda.category == 'Domicilio'){
+              console.log(miCliente);
+
               let pedidoNuevo = new Pedido({
                 state:0,
                 Valor_Domicilio:3500,
@@ -191,8 +194,8 @@ function saveComanda(req,res){
                 nombreUser:comanda.nombreUser,
                 phone:comanda.phone,
                 total:comanda.total+3500,
-                date:new Date(),
-                user:miCliente._id
+                date:new Date()
+            //    user:miCliente._id
               })
               pedidoNuevo.productos = []
               comanda.productos.forEach(function(produ){
