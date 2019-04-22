@@ -120,7 +120,7 @@ function updatePedido(req,res){
     var listaEmpresas = []
     var listaDirecciones = []
     var listaTotales =[]
-    pedidoJson.productos.forEach(function(produ)){
+    pedidoJson.productos.forEach(function(produ){
       if(!listaEmpresas.includes(produ.empresa)){
         listaEmpresas.push(produ.empresa)
         listaDirecciones.push(produ.address)
