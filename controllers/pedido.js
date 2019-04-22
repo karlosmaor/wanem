@@ -130,7 +130,7 @@ function updatePedido(req,res){
           comentario:pedidoJson.comentario,
           empresa:listaEmpresas[i],
           nombreUser:pedidoJson.nombreUser,
-          phone:phone,
+          phone:pedidoJson.phone,
           date:new Date()
         })
         var totalComanda = 0
