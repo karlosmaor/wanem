@@ -136,7 +136,7 @@ function updatePedido(req,res){
         var productosEmpresa = pedidoJson.productos.filter(x => x.empresa._id == listaEmpresas[i]._id)
 
         productosEmpresa.forEach(function(product){
-          var newProducto = new Producto({
+          var newProducto = {
             entregado:false,
             parallevar:false,
             cantidad:product.cantidad,
@@ -145,7 +145,7 @@ function updatePedido(req,res){
             imagen:product.imagen,
             nombre:product.nombre,
             precio:product.precio
-          })
+          }
           totalComanda += product.precio
           newProducto.caracteristicas.forEach(function(carac){
             carac.opciones.forEach(function(opc){
