@@ -120,7 +120,9 @@ function updatePedido(req,res){
           listaDirecciones.push(produ.address)
         }
       })
-      for(var i=0; i<listaEmpresas.length; i++){
+      console.log(listaEmpresas);
+      console.log(listaDirecciones);
+    /*  for(var i=0; i<listaEmpresas.length; i++){
         let comandaNueva = new Comanda({
           state:0,
           addressEnd:pedidoJson.addressEnd,
@@ -135,7 +137,7 @@ function updatePedido(req,res){
         })
         var totalComanda = 0
         var productosEmpresa = pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i])
-        
+
         productosEmpresa.forEach(function(product){
           var newProducto = new Producto({
             entregado:false,
@@ -164,7 +166,7 @@ function updatePedido(req,res){
         })
         newProducto.mesero = '5cbe474217fc4464df6907fc'
         console.log(comandaNueva);
-      }
+      }*/
     }
   //
 
