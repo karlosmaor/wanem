@@ -208,9 +208,10 @@ function saveComanda(req,res){
                 }
                 pedidoNuevo.productos.push(newProducto)
               })
+              console.log('Nuevo Pedido');
+              console.log(pedidoNuevo);
             }
-            console.log('Nuevo Pedido');
-            console.log(pedidoNuevo);
+
             //
           })
         }else{
