@@ -135,6 +135,7 @@ function updatePedido(req,res){
         })
         var totalComanda = 0
         var productosEmpresa = pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i])
+        
         productosEmpresa.forEach(function(product){
           var newProducto = new Producto({
             entregado:false,
