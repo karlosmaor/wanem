@@ -120,7 +120,7 @@ function updatePedido(req,res){
           listaDirecciones.push(produ.address)
         }
       })
-      for(i=0; i<listaEmpresas.length; i++){
+      for(var i=0; i<listaEmpresas.length; i++){
         let comandaNueva = new Comanda({
           state:0,
           addressEnd:pedidoJson.addressEnd,
