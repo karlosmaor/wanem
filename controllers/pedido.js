@@ -112,31 +112,28 @@ function updatePedido(req,res){
   //Creando pedidos para la caja de los restaurantes
     if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
       var listaEmpresas = []
-      var listaDirecciones = []
       var listaTotales =[]
       pedidoJson.productos.forEach(function(produ){
         if(!listaEmpresas.includes(produ.empresa)){
           listaEmpresas.push(produ.empresa)
-          listaDirecciones.push(produ.address)
         }
       })
-      console.log(listaEmpresas);
-      console.log(listaDirecciones);
-    /*  for(var i=0; i<listaEmpresas.length; i++){
+
+      for(var i=0; i<listaEmpresas.length; i++){
         let comandaNueva = new Comanda({
           state:0,
           addressEnd:pedidoJson.addressEnd,
-          addressStart:listaDirecciones[i],
+          addressStart:listaEmpresas[i].address,
           category:'Domicilio',
           city:pedidoJson.city,
           comentario:pedidoJson.comentario,
-          empresa:listaEmpresas[i],
+          empresa:listaEmpresas[i]._id,
           nombreUser:pedidoJson.nombreUser,
           phone:pedidoJson.phone,
           date:new Date()
         })
         var totalComanda = 0
-        var productosEmpresa = pedidoJson.productos.filter(x => x.empresa == listaEmpresas[i])
+        var productosEmpresa = pedidoJson.productos.filter(x => x.empresa._id == listaEmpresas[i]._id)
 
         productosEmpresa.forEach(function(product){
           var newProducto = new Producto({
@@ -159,14 +156,14 @@ function updatePedido(req,res){
           })
         })
         newProducto.total = totalComanda
-        Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i], addressStart: listaDirecciones[i]}, (err,c) => {
+        Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i]._id, addressStart: listaEmpresas[i].address}, (err,c) => {
           if(err) return res.status(500).send({message :`Error contando los pedidos: ${err}`})
 
           comanda.cod = c
         })
         newProducto.mesero = '5cbe474217fc4464df6907fc'
         console.log(comandaNueva);
-      }*/
+      }
     }
   //
 
