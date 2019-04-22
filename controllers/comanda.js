@@ -162,9 +162,7 @@ function saveComanda(req,res){
 
               newUser.save((err,userStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
-              //  client = newClientStored
-                console.log(newUser);
-                console.log(userStored);
+                client = newUser
 
                 res.status(200).send(comandaStored)
               })
@@ -192,8 +190,8 @@ function saveComanda(req,res){
                 nombreUser:comanda.nombreUser,
                 phone:comanda.phone,
                 total:comanda.total+3500,
-                date:new Date()
-                //user:client._id
+                date:new Date(),
+                user:client._id
               })
               pedidoNuevo.productos = []
               comanda.productos.forEach(function(produ){
