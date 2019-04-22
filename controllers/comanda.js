@@ -153,6 +153,7 @@ function saveComanda(req,res){
         if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
 
         if(comanda.phone.length > 3){
+          var miCliente
 
           User.findOne({phone: comanda.phone}, (err, client)=>{
             if(err) return res.status(500).send(err)
@@ -162,7 +163,7 @@ function saveComanda(req,res){
 
               newUser.save((err,userStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
-                client = newUser
+                miCliente = newUser
 
                 res.status(200).send(comandaStored)
               })
@@ -172,7 +173,7 @@ function saveComanda(req,res){
               client.name = comanda.nombreUser
               client.save((err,userStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
-
+                miCliente = client
                 res.status(200).send(comandaStored)
               })
             }
@@ -191,7 +192,7 @@ function saveComanda(req,res){
                 phone:comanda.phone,
                 total:comanda.total+3500,
                 date:new Date(),
-                user:client._id
+                user:miCliente._id
               })
               pedidoNuevo.productos = []
               comanda.productos.forEach(function(produ){
