@@ -155,13 +155,13 @@ function updatePedido(req,res){
             })
           })
         })
-        newProducto.total = totalComanda
+        comandaNueva.total = totalComanda
         Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i]._id, addressStart: listaEmpresas[i].address}, (err,c) => {
           if(err) return res.status(500).send({message :`Error contando los pedidos: ${err}`})
 
-          comanda.cod = c
+          comandaNueva.cod = c
         })
-        newProducto.mesero = '5cbe474217fc4464df6907fc'
+        comandaNueva.mesero = '5cbe474217fc4464df6907fc'
         console.log(comandaNueva);
       }
     }
