@@ -160,9 +160,9 @@ function saveComanda(req,res){
             if(!client){
               let newUser = new User({email: comanda.phone, name: comanda.nombreUser, phone: comanda.phone, address: comanda.addressEnd, city: comanda.city, signupDate: new Date(), lastLogin: new Date()})
 
-              newUser.save((err,userStored)=>{
+              newUser.save((err,userStored, newClientStored)=>{
                 if(err) return res.status(500).send({message: `Error registrando nuevo Empleado: ${err}`})
-                client = userStored
+                client = newClientStored
 
                 res.status(200).send(comandaStored)
               })
@@ -177,7 +177,7 @@ function saveComanda(req,res){
               })
             }
             //Crear pedido para Wanem
-            /*if(comanda.category == 'Domicilio'){
+            if(comanda.category == 'Domicilio'){
               let pedidoNuevo = new Pedido({
                 state:0,
                 Valor_Domicilio:3500,
@@ -208,7 +208,7 @@ function saveComanda(req,res){
               })
             }
             console.log('Nuevo Pedido');
-            console.log(pedidoNuevo);*/
+            console.log(pedidoNuevo);
             //
           })
         }else{
