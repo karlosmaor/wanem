@@ -208,10 +208,11 @@ function saveComanda(req,res){
                 }
                 pedidoNuevo.productos.push(newProducto)
               })
-              console.log('Nuevo Pedido');
-              console.log(pedidoNuevo);
-            }
+              pedidoNuevo.save((err,pedidoGuardado)=>{
+                if(err) return res.status(500).send({message: `Error registrando nuevo pedido en wanem: ${err}`})
 
+              })
+            }
             //
           })
         }else{
