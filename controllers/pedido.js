@@ -3,6 +3,7 @@
 require('isomorphic-fetch')
 const mongoose = require('mongoose')
 const Pedido =  require('../models/pedido')
+const Comanda =  require('../models/comanda')
 const User =  require('../models/user')
 const config = require('../config')
 
@@ -114,6 +115,42 @@ function updatePedido(req,res){
 
     res.status(200).send(pedidoUpdated)
   })
+//Creando pedidos para la caja de los restaurantes
+  /*if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
+    let comandaNueva = new Comanda({
+      state:0,
+      Valor_Domicilio:3500,
+      Valor_Productos:comanda.total,
+      addressEnd:comanda.addressEnd,
+      category:'Moto_Empresa',
+      city:comanda.city,
+      comentario:comanda.comentario.concat(' - No es necesario llamar al cliente'),
+      modoPago:'efectivo',
+      nombreUser:comanda.nombreUser,
+      phone:comanda.phone,
+      total:comanda.total+3500,
+      date:new Date(),
+      user:miCliente._id
+    })
+    pedidoNuevo.productos = []
+    comanda.productos.forEach(function(produ){
+      var newProducto = {
+        cantidad:produ.cantidad,
+        caracteristicas:produ.caracteristicas,
+        descripcion:produ.descripcion,
+        imagen:produ.imagen,
+        nombre:produ.nombre,
+        precio:produ.precio,
+        empresa:comanda.empresa
+      }
+      pedidoNuevo.productos.push(newProducto)
+    })
+    pedidoNuevo.save((err,pedidoGuardado)=>{
+      if(err) return res.status(500).send({message: `Error registrando nuevo pedido en wanem: ${err}`})
+
+    })
+  }*/
+//
 }
 
 function deletePedido(req,res){
