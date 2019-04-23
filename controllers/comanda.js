@@ -348,6 +348,35 @@ function CierreCaja(req, res){
   })
 }
 
+function CierreCaja2(req, res){
+
+  var fecha = new Date()
+  var start = new Date()
+  var end = new Date()
+  start.setHours(5,0,0,0)
+  end.setHours(5,0,0,0)
+  if(fecha<start){
+    start.setHours(start.getHours()-24)
+  }else {
+    end.setHours(end.getHours()+24)
+  }
+//  start.setHours(start.getHours()-24)
+// end.setHours(end.getHours()-24)
+  Comanda.find({
+    empresa: req.body.empresaId,
+    addressStart: req.body.addressStart,
+    cajero:req.body.cajero,
+    state: {'$gte': 4},
+    date: {'$gte': start,'$lte': end}
+  }).sort('-date').exec((err, comandas)=>{
+
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
+
+    res.status(200).send({lista:comandas}})
+  })
+}
+
 module.exports ={
   getComanda,
   getComandas,
@@ -359,5 +388,6 @@ module.exports ={
   searchFecha,
   searchState,
   CargarBase,
-  CierreCaja
+  CierreCaja,
+  CierreCaja2
 }
