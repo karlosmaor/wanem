@@ -123,7 +123,7 @@ function updatePedido(req,res){
         let comandaNueva = new Comanda({
           state:0,
           addressEnd:pedidoJson.addressEnd,
-          addressStart:listaEmpresas[i].address[0],
+          addressStart:listaEmpresas[i].address[0].split('?')[0],
           category:'Domicilio',
           city:pedidoJson.city,
           comentario:pedidoJson.comentario,
@@ -157,7 +157,7 @@ function updatePedido(req,res){
           comandaNueva.productos.push(newProducto)
         })
         comandaNueva.total = totalComanda
-        Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i]._id, addressStart: listaEmpresas[i].address[0]}, (err,c) => {
+        Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i]._id, addressStart: listaEmpresas[i].address[0].split('?')[0]}, (err,c) => {
           if(err) return res.status(500).send({message :`Error contando los pedidos: ${err}`})
 
           comandaNueva.cod = c
