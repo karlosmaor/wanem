@@ -154,6 +154,7 @@ function updatePedido(req,res){
               }
             })
           })
+          comandaNueva.productos.push(newProducto)
         })
         comandaNueva.total = totalComanda
         Comanda.countDocuments({state:{'$lte': 6}, empresa: listaEmpresas[i]._id, addressStart: listaEmpresas[i].address}, (err,c) => {
