@@ -163,7 +163,9 @@ function updatePedido(req,res){
           comandaNueva.cod = c
         })
         comandaNueva.mesero = '5cbe474217fc4464df6907fc'
-        console.log(comandaNueva);
+        comandaNueva.save((err)=>{
+          if(err)return res.status(500).send(err)
+        })
       }
     }
   //
