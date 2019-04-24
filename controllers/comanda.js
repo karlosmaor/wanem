@@ -146,8 +146,6 @@ function saveComanda(req,res){
 
       comanda.cod = c
 
-      console.log(comanda);
-
       comanda.save((err, comandaStored)=>{
         if(err)return res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
         if(!comandaStored) res.status(500).send({message :`Error al guardar la entrega en la base de datos: ${err}`})
