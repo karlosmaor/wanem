@@ -34,8 +34,8 @@ function getComandasDia(req, res){
   var fecha = new Date()
   var start = new Date()
   var end = new Date()
-  start.setHours(5,0,0,0)
-  end.setHours(5,0,0,0)
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
   if(fecha<start){
     start.setHours(start.getHours()-24)
   }else {
@@ -87,8 +87,8 @@ function getComandasActuales(req, res){
   var fecha = new Date()
   var start = new Date()
   var end = new Date()
-  start.setHours(5,0,0,0)
-  end.setHours(5,0,0,0)
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
   if(fecha<start){
     start.setHours(start.getHours()-24)
   }else {
@@ -128,8 +128,8 @@ function saveComanda(req,res){
   var fecha = new Date()
   var start = new Date()
   var end = new Date()
-  start.setHours(5,0,0,0)
-  end.setHours(5,0,0,0)
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
   if(fecha<start){
     start.setHours(start.getHours()-24)
   }else {
@@ -272,8 +272,8 @@ function searchFecha(req, res){
 //  var fecha = new Date()
   var start = new Date(req.body.fechaInicio)
   var end = new Date(req.body.fechaFinal)
-  start.setHours(5,0,0,0)
-  end.setHours(5,0,0,0)
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
 
   //console.log(start);
   //console.log(end);
@@ -313,8 +313,8 @@ function CierreCaja(req, res){
   var fecha = new Date()
   var start = new Date()
   var end = new Date()
-  start.setHours(5,0,0,0)
-  end.setHours(5,0,0,0)
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
   if(fecha<start){
     start.setHours(start.getHours()-24)
   }else {
@@ -351,8 +351,8 @@ function CierreCaja2(req, res){
   var fecha = new Date()
   var start = new Date()
   var end = new Date()
-  start.setHours(5,0,0,0)
-  end.setHours(5,0,0,0)
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
   if(fecha<start){
     start.setHours(start.getHours()-24)
   }else {
