@@ -108,7 +108,7 @@ function updatePedido(req,res){
   delete pedidoJson.user
 
   //Creando pedidos para la caja de los restaurantes
-    if(pedidoJson.state == 1 && pedidoJson.category != 'Moto_Empresa'){
+    if(pedidoJson.state == 1 && (pedidoJson.category != 'Moto_Empresa' || pedidoJson.category != 'Moto_Ya')){
       var listaEmpresas = []
       var listaTotales =[]
       pedidoJson.productos.forEach(function(produ){
@@ -165,6 +165,7 @@ function updatePedido(req,res){
           if(err)return res.status(500).send(err)
         })
       }
+      pedidoJson.category = 'Moto_Ya'
     }
   //
 
