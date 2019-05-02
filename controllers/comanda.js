@@ -110,6 +110,34 @@ function getComandasActuales(req, res){
   })
 }
 
+function getComandasActuales2(req, res){
+
+  var fecha = new Date()
+  var start = new Date()
+  var end = new Date()
+  start.setHours(9,0,0,0)
+  end.setHours(9,0,0,0)
+  if(fecha<start){
+    start.setHours(start.getHours()-24)
+  }else {
+    end.setHours(end.getHours()+24)
+  }
+//  start.setHours(start.getHours()-24)
+// end.setHours(end.getHours()-24)
+  Comanda.find({
+    empresa: req.body.empresaId,
+    addressStart: req.body.addressStart,
+    state: {'$lte': 3},
+    date: {'$gte': start,'$lte': end}
+  }).sort('-date').populate('mesero').exec((err, comandas)=>{
+
+    if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
+    if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
+
+    res.status(200).send(comandas)
+  })
+}
+
 function saveComanda(req,res){
 
   let comandaJson = JSON.parse(req.body.comandaJson)
@@ -380,6 +408,7 @@ module.exports ={
   getComandas,
   getComandasDia,
   getComandasActuales,
+  getComandasActuales2,
   saveComanda,
   updateComanda,
   deleteComanda,
