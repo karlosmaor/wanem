@@ -309,12 +309,11 @@ function searchFecha(req, res){
   Comanda.find({
     empresa: req.body.empresaId,
     date: {'$gte': start,'$lte': end}
-  }).sort('-date').populate('mesero').populate('cajero').exec((err, comandas)=>{
+  }).sort('-date').populate('mesero', '-ingresoDate').populate('cajero').exec((err, comandas)=>{
 
     if(err)return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(comandas.length == 0)return res.status(501).send({message:'No hay pedidos pendientes'})
 
-    console.log({lista: comandas.filter(x => x.state < 5), gastos: comandas.filter(x => x.state == 11), ingresos: comandas.filter(x => x.state == 12)});
     res.status(200).send({lista: comandas.filter(x => x.state < 5), gastos: comandas.filter(x => x.state == 11), ingresos: comandas.filter(x => x.state == 12)})
   })
 }
