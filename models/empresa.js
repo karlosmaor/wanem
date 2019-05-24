@@ -12,6 +12,7 @@ const EmpresaSchema = new Schema({
   name: String,
   avatar: String,
   address: [String],
+  precioEmpaque: {type: Number, default: 0},
   impresoras: [String],
   city: String,
   phone: String,
