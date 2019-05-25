@@ -18,7 +18,7 @@ function getUser(req,res){
 
 function getUserByCel(req,res){
 
-  User.findOne({phone:req.body.phone}, (err, user) => {
+  User.findOne({phone:req.body.phone}, '-pedidos', (err, user) => {
 
     if(err) return res.status(500).send({message:`Error al realizar la petición ${err}`})
     if(!user) return res.status(404).send({message:'El usuario no se encontró'})
