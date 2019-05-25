@@ -16,7 +16,6 @@ const InfoCtrl = require('../controllers/info')
 
 api.get('/users', UserCtrl.getUsers)
 api.get('/user/:userId', UserCtrl.getUser)
-api.post('/user/cel', UserCtrl.getUserByCel)
 api.post('/user', UserCtrl.saveUser)
 api.post('/user/get/create', UserCtrl.getCreate)
 api.post('/user/:userId', UserCtrl.updateUser)
