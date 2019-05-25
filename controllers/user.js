@@ -122,6 +122,7 @@ function getCreate(req,res){
 
 module.exports = {
   getUser,
+  getUserByCel,
   getUsers,
   deleteUser,
   updateUser,
