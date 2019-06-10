@@ -11,7 +11,7 @@ mongoose.connect(config.db, { useCreateIndex: true, useNewUrlParser: true, useFi
   }
   console.log('Conexion a la base de datos exitosa...')
 
-  app.listen(config.port, () => {
+  app.listen(config.port, () => { 
     console.log('API REST corriendo exitosamente')
   })
 })
