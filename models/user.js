@@ -17,7 +17,7 @@ const UserSchema = new Schema({
     lat: {type: Number, default: 0.0},
     lng: {type: Number, default: 0.0}
   },
-  signupDate: Date,
+  signupDate: Date,  
   lastLogin: Date
 })
 
