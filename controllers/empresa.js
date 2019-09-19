@@ -22,7 +22,7 @@ function getEmpresas(req, res){
     if(empresas.length == 0)return res.status(501).send({message:'No hay Empresas registrados'})
 
     res.status(200).send(empresas)
-  })
+  })  
 }
 
 function updateEmpresa(req,res){
