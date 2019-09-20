@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const app =  express()
 const api = require('../routes')
 
-app.use('/wanem', expressStatic('./webapp'))
+app.use('/wanem', expressStatic('./webapp'))     )
 app.use('/webapp/TemplateData', expressStatic('./webapp/TemplateData'))
 app.use('/webapp/Build', expressStatic('./webapp/Build'))
 app.use('/info', expressStatic('./public'))
